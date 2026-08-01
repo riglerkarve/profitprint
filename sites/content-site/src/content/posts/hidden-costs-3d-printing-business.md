@@ -23,7 +23,7 @@ Every failure still burned filament, electricity, and machine time — and your 
 
 ## 4. Marketplace and payment fees
 
-Etsy takes a listing fee, a transaction fee, *and* a payment-processing cut — and it all comes off the **final sale price**, not your cost. That's why adding a flat markup to cost doesn't give you the margin you think. On a $20 item, Etsy-style fees can be $2+ before you've paid for anything. Always price so your margin survives the fees. (Our [pricing guide](/guides/how-to-price-3d-prints/) shows the exact formula.)
+Etsy takes a listing fee, a transaction fee, *and* a payment-processing cut — and it all comes off the **final sale price**, not your cost. That's why adding a flat markup to cost doesn't give you the margin you think. On a $20 item, Etsy-style fees can be $2+ before you've paid for anything. Always price so your margin survives the fees. (Our [pricing guide](../how-to-price-3d-prints/) shows the exact formula.)
 
 ## 5. Packaging and shipping supplies
 
@@ -42,8 +42,8 @@ Customer says it arrived cracked; a print has a blemish you didn't catch; a colo
 Notice what these have in common: **none of them appear on the filament receipt, and all of them are real cash.** Sellers who last are the ones who put every one of these into their price from day one — not the ones with the cheapest filament.
 
 <div class="callout">
-<strong>Want all seven baked into a price automatically?</strong> The <a href="https://printprofit.pages.dev/">free PrintProfit calculator</a> includes material, power, depreciation, labor, failure rate, packaging, and fees in one number.
-<br><a class="btn" href="https://printprofit.pages.dev/">Try the calculator →</a>
+<strong>Want all seven baked into a price automatically?</strong> The <a href="../../tool/">free PrintProfit calculator</a> includes material, power, depreciation, labor, failure rate, packaging, and fees in one number.
+<br><a class="btn" href="../../tool/">Try the calculator →</a>
 </div>
 
 Running more than a handful of products? The [Pro spreadsheet](https://payhip.com/PrintProfit) tracks all of this across your whole shop and rolls it into a monthly profit-and-loss so you can see, in one place, whether the business actually works.

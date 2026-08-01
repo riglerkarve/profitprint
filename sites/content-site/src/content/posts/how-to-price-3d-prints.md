@@ -7,7 +7,7 @@ tags: ["pricing", "selling", "etsy"]
 
 If you sell 3D prints, here's the uncomfortable truth: **"filament cost × 3" is why so many listings that look profitable are actually losing money.** It ignores the four costs that quietly eat your margin — your time, your printer wearing out, the prints that fail, and the fees the marketplace takes at checkout.
 
-This guide walks through a pricing method that accounts for all of them, with a real example at the end. It's the same math behind our [free calculator](https://printprofit.pages.dev/), so you can follow along there.
+This guide walks through a pricing method that accounts for all of them, with a real example at the end. It's the same math behind our [free calculator](../../tool/), so you can follow along there.
 
 ## The five things a real price has to cover
 
@@ -69,8 +69,8 @@ price = (true cost + fixed fee) ÷ (1 − margin% − marketplace% − payment%)
 On Etsy (6.5% fee + $0.30 + 2.9% payment) with a 50% target margin, our example's true cost of about **$8.44** produces a suggested price of roughly **$21.50** — leaving a genuine ~$10.76 profit *after* Etsy takes its cut. "Add 50%" to $8.44 would have given $12.66, and after fees you'd keep almost nothing.
 
 <div class="callout">
-<strong>Don't do this by hand every time.</strong> Punch your own numbers into the <a href="https://printprofit.pages.dev/">free PrintProfit calculator</a> — it does all five steps and the fee-aware price for you.
-<br><a class="btn" href="https://printprofit.pages.dev/">Open the calculator →</a>
+<strong>Don't do this by hand every time.</strong> Punch your own numbers into the <a href="../../tool/">free PrintProfit calculator</a> — it does all five steps and the fee-aware price for you.
+<br><a class="btn" href="../../tool/">Open the calculator →</a>
 </div>
 
 ## Worked example (recap)
@@ -91,4 +91,4 @@ On Etsy (6.5% fee + $0.30 + 2.9% payment) with a 50% target margin, our example'
 
 This gives you a **floor**, not a magic number. It doesn't include shipping, returns, taxes, or the value of your brand and design work — all of which can push the price up. And no pricing method guarantees sales: the market decides what it'll pay. What this does guarantee is that you'll stop selling at a loss without realizing it.
 
-**Next:** the [7 costs every print seller forgets](/guides/hidden-costs-3d-printing-business/), and [budget printers that make business sense](/guides/best-budget-3d-printers-print-business-2026/).
+**Next:** the [7 costs every print seller forgets](../hidden-costs-3d-printing-business/), and [budget printers that make business sense](../best-budget-3d-printers-print-business-2026/).

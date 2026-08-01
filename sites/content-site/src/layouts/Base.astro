@@ -7,6 +7,7 @@ export interface Props {
 const { title, description, article = false } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const year = new Date().getFullYear();
+const base = import.meta.env.BASE_URL; // e.g. "/profitprint/"
 ---
 <!doctype html>
 <html lang="en">
@@ -58,21 +59,21 @@ const year = new Date().getFullYear();
 <body>
   <div class="wrap">
     <header class="nav">
-      <a href="/" class="logo">P</a>
-      <a href="/">PrintProfit</a>
-      <a href="/guides/">Guides</a>
+      <a href={base} class="logo">P</a>
+      <a href={base}>PrintProfit</a>
+      <a href={`${base}guides/`}>Guides</a>
       <span class="spacer"></span>
-      <a href="https://printprofit.pages.dev/" class="cta">Free calculator</a>
+      <a href={`${base}tool/`} class="cta">Free calculator</a>
     </header>
     <main>
       <slot />
     </main>
     <footer>
       <span>© {year} PrintProfit</span>
-      <a href="/disclosure/">Affiliate disclosure</a>
-      <a href="/privacy/">Privacy</a>
-      <a href="/about/">About</a>
-      <a href="https://printprofit.pages.dev/">Free tool</a>
+      <a href={`${base}disclosure/`}>Affiliate disclosure</a>
+      <a href={`${base}privacy/`}>Privacy</a>
+      <a href={`${base}about/`}>About</a>
+      <a href={`${base}tool/`}>Free tool</a>
     </footer>
   </div>
 </body>

@@ -7,10 +7,10 @@ tags: ["gear", "printers", "buyer-guide"]
 ---
 
 <div class="disclosure">
-<strong>Disclosure:</strong> This guide contains affiliate links. As an Amazon Associate, PrintProfit earns from qualifying purchases — at no extra cost to you. We rank on what makes business sense, not on commissions, and we never publish fake reviews. Where we haven't personally tested a machine, we say so and summarize specs plus public owner feedback. See our full <a href="/disclosure/">disclosure</a>.
+<strong>Disclosure:</strong> This guide contains affiliate links. As an Amazon Associate, PrintProfit earns from qualifying purchases — at no extra cost to you. We rank on what makes business sense, not on commissions, and we never publish fake reviews. Where we haven't personally tested a machine, we say so and summarize specs plus public owner feedback. See our full <a href="../../disclosure/">disclosure</a>.
 </div>
 
-When you're printing to *sell*, the sticker price of a printer is almost the least important number. What matters is **cost per reliable print hour**: a cheap machine that jams every third print and needs constant babysitting can be far more expensive than a slightly pricier one that just runs. Remember, your printer's cost is a real per-hour line in your [pricing math](/guides/how-to-price-3d-prints/) — a machine that lasts longer literally lowers the price you need to charge.
+When you're printing to *sell*, the sticker price of a printer is almost the least important number. What matters is **cost per reliable print hour**: a cheap machine that jams every third print and needs constant babysitting can be far more expensive than a slightly pricier one that just runs. Remember, your printer's cost is a real per-hour line in your [pricing math](../how-to-price-3d-prints/) — a machine that lasts longer literally lowers the price you need to charge.
 
 Here's how to think about budget printers for a small print business in 2026. We're deliberately talking in **categories** rather than pretending to have bench-tested every unit, because that's the honest version.
 
@@ -43,8 +43,8 @@ Unbeatable detail for miniatures and jewelry, but resin adds cost and labor: con
 4. **Buy the community, not just the machine.** A model with lots of owners means cheap spares, free profiles, and fast answers.
 
 <div class="callout">
-<strong>Before you buy, run the numbers.</strong> Plug a printer's price and your expected print hours into the <a href="https://printprofit.pages.dev/">free calculator</a> to see how much machine depreciation actually adds to each print — it's smaller than people fear, and it makes the "buy reliable" case obvious.
-<br><a class="btn" href="https://printprofit.pages.dev/">Open the calculator →</a>
+<strong>Before you buy, run the numbers.</strong> Plug a printer's price and your expected print hours into the <a href="../../tool/">free calculator</a> to see how much machine depreciation actually adds to each print — it's smaller than people fear, and it makes the "buy reliable" case obvious.
+<br><a class="btn" href="../../tool/">Open the calculator →</a>
 </div>
 
 ## Where to buy
@@ -57,4 +57,4 @@ We link to current listings on Amazon so you can check up-to-date prices, specs,
 
 > **Owner note:** the affiliate tag is a placeholder until the Amazon Associates account is approved (a human checkpoint — it needs real tax/identity info). Until then these are plain search links and earn nothing. We'll swap in specific, current model recommendations once we can verify pricing and stock at publish time, rather than name models that may be discontinued.
 
-**Related:** [How to price your prints](/guides/how-to-price-3d-prints/) · [7 costs every seller forgets](/guides/hidden-costs-3d-printing-business/)
+**Related:** [How to price your prints](../how-to-price-3d-prints/) · [7 costs every seller forgets](../hidden-costs-3d-printing-business/)
