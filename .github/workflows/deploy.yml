@@ -1,0 +1,68 @@
+name: Deploy site + tool + dashboard (GitHub Pages)
+
+# Builds the Astro content site and assembles the static tool and dashboard
+# alongside it into one Pages deployment. Free for public repos.
+#
+# Result layout on the published site:
+#   /            -> content site (Astro)
+#   /tool/       -> free print-cost calculator
+#   /dashboard/  -> portfolio dashboard
+#   /data/metrics.json -> metrics the dashboard reads
+#
+# NOTE: this deploys at the site ROOT. If you use a *project* Pages URL
+# (username.github.io/REPO), also set `base: '/REPO'` in sites/content-site/
+# astro.config.mjs and update the absolute cross-links, OR host on Cloudflare
+# Pages (recommended) where each project can be its own subdomain.
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Build content site
+        working-directory: sites/content-site
+        run: |
+          npm install
+          npm run build
+
+      - name: Assemble _site
+        run: |
+          mkdir -p _site
+          cp -r sites/content-site/dist/* _site/
+          mkdir -p _site/tool _site/dashboard _site/data
+          cp tools/print-cost-calculator/index.html _site/tool/
+          cp dashboard/index.html dashboard/data.js _site/dashboard/
+          cp data/metrics.json _site/data/metrics.json
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

@@ -1,0 +1,39 @@
+name: Daily briefing
+
+# Generates reports/YYYY-MM-DD.md from data/metrics.json and commits it.
+# Cron is free on public repos. Runs at 13:00 UTC daily (~morning US).
+# You can edit data/metrics.json (or reports/_activity.json) any time; the next
+# run picks it up. Manual run: the "Run workflow" button (workflow_dispatch).
+
+on:
+  schedule:
+    - cron: '0 13 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  briefing:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Generate briefing + sync dashboard data
+        run: node scripts/daily-briefing.mjs
+
+      - name: Commit if changed
+        run: |
+          git config user.name  "printprofit-bot"
+          git config user.email "actions@github.com"
+          git add reports/ dashboard/data.js
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore: daily briefing $(date -u +%Y-%m-%d)"
+            git push
+          fi

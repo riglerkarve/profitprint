@@ -1,0 +1,36 @@
+name: Build product spreadsheet
+
+# Generates the paid Payhip product (.xlsx) from source with openpyxl and
+# uploads it as a downloadable artifact. Free for public repos.
+# Download the artifact from the run, then upload the .xlsx to Payhip.
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'product/pricing-spreadsheet/**'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install deps
+        working-directory: product/pricing-spreadsheet
+        run: pip install -r requirements.txt
+
+      - name: Build spreadsheet
+        working-directory: product/pricing-spreadsheet
+        run: python build_spreadsheet.py
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: PrintProfit-Pro-Pricing-Spreadsheet
+          path: product/pricing-spreadsheet/dist/*.xlsx
+          if-no-files-found: error

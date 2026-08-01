@@ -1,0 +1,27 @@
+---
+import Base from '../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+const posts = (await getCollection('posts', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+---
+<Base title="PrintProfit — Price your 3D prints so you actually make money" description="Honest guides, a free pricing calculator, and a pro spreadsheet for people who sell 3D prints. Price after labor, machine wear, failures, and marketplace fees.">
+  <h1>Sell 3D prints without quietly losing money</h1>
+  <p>Most sellers price on filament alone. We help you price on what a print <em>actually</em> costs — labor, machine wear, failed prints, packaging, and marketplace fees — so the profit you think you're making is the profit you keep.</p>
+
+  <div class="callout">
+    <strong>Start free:</strong> the PrintProfit calculator gives you a fee-aware suggested price for any single print in about 30 seconds.
+    <br><a class="btn" href="https://printprofit.pages.dev/">Open the free calculator →</a>
+  </div>
+
+  <h2>Guides</h2>
+  {posts.map((p) => (
+    <a class="card" href={`/guides/${p.slug}/`}>
+      <h3>{p.data.title}</h3>
+      <p>{p.data.description}</p>
+    </a>
+  ))}
+
+  <div class="callout" style="margin-top:28px">
+    <strong>Selling more than a couple prints a week?</strong> The <a href="https://payhip.com/PrintProfit">PrintProfit Pro Spreadsheet</a> prices your whole shop and builds a monthly profit &amp; loss.
+  </div>
+</Base>

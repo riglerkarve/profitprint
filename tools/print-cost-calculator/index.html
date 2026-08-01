@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>3D Print Cost & Pricing Calculator for Sellers — PrintProfit</title>
+<meta name="description" content="Free 3D printing cost calculator that includes what most sellers forget: labor, machine depreciation, failure rate, packaging, and marketplace fees. See your true cost, suggested price, and real profit margin." />
+<link rel="canonical" href="https://printprofit.pages.dev/" />
+<meta property="og:title" content="3D Print Cost & Pricing Calculator for Sellers" />
+<meta property="og:description" content="Most calculators stop at filament + electricity. This one adds labor, depreciation, failure rate, packaging, and marketplace fees so you know your real profit." />
+<meta property="og:type" content="website" />
+<!--
+  Cloudflare Web Analytics (free, privacy-first, no cookie banner needed).
+  HUMAN CHECKPOINT: paste the token from your Cloudflare dashboard, then uncomment.
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon='{"token": "YOUR_CF_TOKEN"}'></script>
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "PrintProfit 3D Print Cost & Pricing Calculator",
+  "applicationCategory": "BusinessApplication",
+  "operatingSystem": "Any (web)",
+  "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" }
+}
+</script>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#111827; --muted:#6b7280; --line:#e5e7eb;
+    --brand:#1f7a5c; --brand-ink:#0f3b2c; --accent:#eef6f2; --good:#127a4a; --warn:#b45309;
+    --shadow:0 1px 2px rgba(0,0,0,.05),0 8px 24px rgba(0,0,0,.06);
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#0e1116; --card:#161b22; --ink:#e6edf3; --muted:#9aa4b2; --line:#293039;
+      --brand:#2ea77c; --brand-ink:#8fe3c3; --accent:#12261e; --good:#3fb984; --warn:#e0a94a;
+      --shadow:0 1px 2px rgba(0,0,0,.4),0 10px 30px rgba(0,0,0,.5);}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font:16px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    background:var(--bg);color:var(--ink);-webkit-text-size-adjust:100%}
+  a{color:var(--brand)}
+  .wrap{max-width:1000px;margin:0 auto;padding:24px 16px 64px}
+  header.site{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .logo{width:34px;height:34px;border-radius:9px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800}
+  .brand{font-weight:800;letter-spacing:-.2px}
+  h1{font-size:clamp(22px,3vw,30px);line-height:1.2;margin:18px 0 6px}
+  .sub{color:var(--muted);margin:0 0 20px;max-width:70ch}
+  .grid{display:grid;grid-template-columns:1.25fr 1fr;gap:20px}
+  @media (max-width:820px){.grid{grid-template-columns:1fr}}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:var(--shadow)}
+  fieldset{border:0;padding:0;margin:0 0 14px}
+  legend{font-weight:700;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:8px}
+  .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:8px 0}
+  .row label{font-size:14px}
+  .row .hint{grid-column:1/-1;color:var(--muted);font-size:12px;margin-top:-4px}
+  input[type=number],select{width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;
+    background:var(--bg);color:var(--ink);font:inherit;text-align:right}
+  select{text-align:left;width:150px}
+  .out{position:sticky;top:16px}
+  .big{font-size:34px;font-weight:800;letter-spacing:-.5px;margin:2px 0}
+  .price{color:var(--brand)}
+  .kv{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--line);font-size:14px}
+  .kv:last-child{border-bottom:0}
+  .kv .v{font-variant-numeric:tabular-nums;font-weight:600}
+  .pill{display:inline-block;font-size:12px;padding:2px 9px;border-radius:999px;background:var(--accent);color:var(--brand-ink);font-weight:700}
+  .margin-good{color:var(--good)} .margin-warn{color:var(--warn)}
+  .bar{height:12px;border-radius:999px;background:var(--line);overflow:hidden;display:flex;margin:10px 0 4px}
+  .bar span{display:block;height:100%}
+  .legend{display:flex;flex-wrap:wrap;gap:10px;font-size:12px;color:var(--muted);margin-top:2px}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  .cta{margin-top:16px;padding:14px;border:1px dashed var(--brand);border-radius:12px;background:var(--accent)}
+  .cta a.btn{display:inline-block;margin-top:8px;background:var(--brand);color:#fff;text-decoration:none;
+    padding:9px 14px;border-radius:9px;font-weight:700}
+  details{margin-top:22px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:8px 18px}
+  summary{cursor:pointer;font-weight:700;padding:10px 0}
+  .note{font-size:13px;color:var(--muted);margin-top:22px;border-top:1px solid var(--line);padding-top:14px}
+  footer{margin-top:28px;color:var(--muted);font-size:13px;display:flex;gap:14px;flex-wrap:wrap}
+  .toolbar{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+  .toolbar button{font:inherit;font-size:13px;padding:7px 11px;border:1px solid var(--line);border-radius:9px;
+    background:var(--bg);color:var(--ink);cursor:pointer}
+  .toolbar button:hover{border-color:var(--brand)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="site">
+    <div class="logo">P</div>
+    <div class="brand">PrintProfit</div>
+    <span class="pill" style="margin-left:auto">Free tool</span>
+  </header>
+
+  <h1>3D Print Cost &amp; Pricing Calculator <span class="pill">for sellers</span></h1>
+  <p class="sub">Most calculators stop at filament + electricity — then you sell on Etsy, the fees hit, and the "profitable" listing quietly loses money. This one includes <strong>labor, machine depreciation, failure rate, packaging, and marketplace fees</strong> so you see your <em>true</em> cost and real margin. Nothing is sent anywhere; the math runs in your browser.</p>
+
+  <div class="grid">
+    <!-- INPUTS -->
+    <form class="card" id="calc" oninput="recalc()">
+      <fieldset>
+        <legend>Material</legend>
+        <div class="row"><label for="spoolPrice">Spool price</label><input id="spoolPrice" type="number" min="0" step="0.01" value="22"></div>
+        <div class="row"><label for="spoolWeight">Spool weight (g)</label><input id="spoolWeight" type="number" min="1" step="1" value="1000"></div>
+        <div class="row"><label for="gramsUsed">Grams used in this print</label><input id="gramsUsed" type="number" min="0" step="0.1" value="45"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Machine &amp; power</legend>
+        <div class="row"><label for="printHours">Print time (hours)</label><input id="printHours" type="number" min="0" step="0.1" value="6"></div>
+        <div class="row"><label for="powerW">Printer power draw (W)</label><input id="powerW" type="number" min="0" step="1" value="120"></div>
+        <div class="row"><label for="kwhRate">Electricity ($/kWh)</label><input id="kwhRate" type="number" min="0" step="0.01" value="0.17"></div>
+        <div class="row"><label for="printerCost">Printer + upgrades cost</label><input id="printerCost" type="number" min="0" step="1" value="300"></div>
+        <div class="row"><label for="printerLife">Expected life (print hours)</label><input id="printerLife" type="number" min="1" step="50" value="4000"></div>
+        <p class="hint">Depreciation = printer cost ÷ expected life, charged per print hour. This is the number hobby pricing forgets.</p>
+      </fieldset>
+
+      <fieldset>
+        <legend>Your time (labor)</legend>
+        <div class="row"><label for="laborMin">Hands-on minutes (setup, removal, finishing)</label><input id="laborMin" type="number" min="0" step="1" value="20"></div>
+        <div class="row"><label for="laborRate">Your hourly rate ($)</label><input id="laborRate" type="number" min="0" step="0.5" value="18"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Waste &amp; extras</legend>
+        <div class="row"><label for="failRate">Failure / reprint rate (%)</label><input id="failRate" type="number" min="0" max="90" step="1" value="8"></div>
+        <div class="row"><label for="packaging">Packaging &amp; consumables ($)</label><input id="packaging" type="number" min="0" step="0.05" value="0.75"></div>
+      </fieldset>
+
+      <fieldset>
+        <legend>Selling &amp; margin</legend>
+        <div class="row"><label for="channel">Sales channel</label>
+          <select id="channel" onchange="applyChannel()">
+            <option value="6.5|0.30|0.029">Etsy (6.5% + $0.30 + 2.9%)</option>
+            <option value="0|0|0.029">Own site / Stripe (2.9% + $0.30)</option>
+            <option value="0|0|0">Local / cash (no fees)</option>
+            <option value="custom">Custom…</option>
+          </select>
+        </div>
+        <div class="row"><label for="feePct">Marketplace fee (%)</label><input id="feePct" type="number" min="0" step="0.1" value="6.5"></div>
+        <div class="row"><label for="feeFlat">Fixed fee per sale ($)</label><input id="feeFlat" type="number" min="0" step="0.01" value="0.30"></div>
+        <div class="row"><label for="payPct">Payment processing (%)</label><input id="payPct" type="number" min="0" step="0.1" value="2.9"></div>
+        <div class="row"><label for="margin">Target profit margin (%)</label><input id="margin" type="number" min="0" max="95" step="1" value="50"></div>
+      </fieldset>
+
+      <div class="toolbar">
+        <button type="button" onclick="resetAll()">Reset</button>
+        <button type="button" onclick="copyResult()">Copy result</button>
+      </div>
+    </form>
+
+    <!-- OUTPUTS -->
+    <div>
+      <div class="card out">
+        <div class="pill">Suggested selling price</div>
+        <div class="big price" id="sellPrice">$0.00</div>
+        <div id="marginLine" style="font-size:14px;margin:-4px 0 12px" class="margin-good"></div>
+
+        <div class="kv"><span>Material</span><span class="v" id="oMaterial">$0.00</span></div>
+        <div class="kv"><span>Electricity</span><span class="v" id="oPower">$0.00</span></div>
+        <div class="kv"><span>Machine depreciation</span><span class="v" id="oDep">$0.00</span></div>
+        <div class="kv"><span>Labor</span><span class="v" id="oLabor">$0.00</span></div>
+        <div class="kv"><span>Failure/reprint allowance</span><span class="v" id="oFail">$0.00</span></div>
+        <div class="kv"><span>Packaging</span><span class="v" id="oPack">$0.00</span></div>
+        <div class="kv"><strong>True cost to make</strong><span class="v" id="oCost"><strong>$0.00</strong></span></div>
+
+        <div class="bar" id="bar"></div>
+        <div class="legend">
+          <span><i style="background:var(--brand)"></i>Cost</span>
+          <span><i style="background:#c084fc"></i>Fees</span>
+          <span><i style="background:var(--good)"></i>Profit</span>
+        </div>
+
+        <div class="kv" style="margin-top:8px"><span>Marketplace &amp; payment fees</span><span class="v" id="oFees">$0.00</span></div>
+        <div class="kv"><span>Profit after fees</span><span class="v" id="oProfit">$0.00</span></div>
+        <div class="kv"><span>Effective hourly return on your time</span><span class="v" id="oHourly">$0.00</span></div>
+
+        <div class="cta">
+          <strong>Selling more than a couple prints a week?</strong>
+          <div style="font-size:14px;color:var(--muted);margin-top:4px">The <strong>PrintProfit Pro Spreadsheet</strong> saves your presets, tracks multiple products, and builds a monthly profit &amp; loss so you can price a whole shop in minutes.</div>
+          <a class="btn" id="upsell" href="https://payhip.com/PrintProfit" rel="noopener" target="_blank">See the Pro Spreadsheet →</a>
+        </div>
+      </div>
+
+      <p class="note"><strong>Honest note:</strong> This is an estimate to help you price with your eyes open — not a promise of sales or income. Real costs vary (support material, nozzle/belt wear, shipping, returns, taxes). Treat the suggested price as a floor to discuss, not a guarantee.</p>
+    </div>
+  </div>
+
+  <details>
+    <summary>How the math works (so you can trust it)</summary>
+    <p style="font-size:14px">
+      <strong>Material</strong> = spool price ÷ spool weight × grams used.<br>
+      <strong>Electricity</strong> = power (W) ÷ 1000 × print hours × $/kWh.<br>
+      <strong>Depreciation</strong> = printer cost ÷ expected life-hours × print hours.<br>
+      <strong>Labor</strong> = hands-on minutes ÷ 60 × your hourly rate.<br>
+      <strong>Failure allowance</strong> = (material + electricity + depreciation) × failure rate %. (You still pay for filament and power on failed prints, so a share of them is baked into every good unit.)<br>
+      <strong>True cost</strong> = material + electricity + depreciation + labor + failure allowance + packaging.<br>
+      <strong>Suggested price</strong> is solved so that, <em>after</em> marketplace + payment fees, your profit equals your target margin of the price:
+      <code>price = (cost + feeFlat) ÷ (1 − marginRate − feePctRate − payPctRate)</code>.<br>
+      That last step is what generic calculators skip — it's why sellers who "add 50%" still lose money once Etsy takes its cut.
+    </p>
+  </details>
+
+  <footer>
+    <span>PrintProfit — free tools for people who sell 3D prints.</span>
+    <a href="../../sites/content-site/">Guides</a>
+    <a href="#" onclick="return false">Affiliate disclosure</a>
+    <span>Runs entirely in your browser · no data leaves this page.</span>
+  </footer>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+const money = n => (n<0?"-$":"$") + Math.abs(n).toFixed(2);
+
+function applyChannel(){
+  const v = $('channel').value;
+  if(v==='custom') return;
+  // option encodes: feePct(%) | feeFlat($) | payPct(fraction)
+  const [feePct, feeFlat, payFrac] = v.split('|').map(Number);
+  $('feePct').value = feePct;
+  $('feeFlat').value = feeFlat;
+  $('payPct').value = (payFrac*100).toFixed(1);
+  recalc();
+}
+
+function num(id){ const v = parseFloat($(id).value); return isFinite(v)&&v>0||v===0 ? v : 0; }
+
+function recalc(){
+  const material = num('spoolWeight')>0 ? num('spoolPrice')/num('spoolWeight')*num('gramsUsed') : 0;
+  const power = num('powerW')/1000*num('printHours')*num('kwhRate');
+  const dep = num('printerLife')>0 ? num('printerCost')/num('printerLife')*num('printHours') : 0;
+  const labor = num('laborMin')/60*num('laborRate');
+  const failBase = material + power + dep;
+  const fail = failBase * (num('failRate')/100);
+  const pack = num('packaging');
+  const cost = material + power + dep + labor + fail + pack;
+
+  const marginR = Math.min(num('margin'),94)/100;
+  const feePctR = num('feePct')/100;
+  const payPctR = num('payPct')/100;
+  const feeFlat = num('feeFlat');
+  const denom = 1 - marginR - feePctR - payPctR;
+
+  let price = denom > 0.02 ? (cost + feeFlat)/denom : (cost + feeFlat)/0.02;
+  const fees = price*(feePctR+payPctR) + feeFlat;
+  const profit = price - cost - fees;
+  const marginPct = price>0 ? profit/price*100 : 0;
+  const totalHrs = num('printHours') + num('laborMin')/60; // rough: elapsed for hourly view uses hands-on time
+  const hourly = num('laborMin')>0 ? profit/(num('laborMin')/60) : profit;
+
+  $('oMaterial').textContent = money(material);
+  $('oPower').textContent = money(power);
+  $('oDep').textContent = money(dep);
+  $('oLabor').textContent = money(labor);
+  $('oFail').textContent = money(fail);
+  $('oPack').textContent = money(pack);
+  $('oCost').innerHTML = "<strong>"+money(cost)+"</strong>";
+  $('sellPrice').textContent = money(price);
+  $('oFees').textContent = money(fees);
+  $('oProfit').textContent = money(profit);
+  $('oHourly').textContent = money(hourly) + " /hr";
+
+  const ml = $('marginLine');
+  ml.textContent = marginPct.toFixed(0)+"% profit margin after fees";
+  ml.className = marginPct >= num('margin')-1 ? "margin-good" : "margin-warn";
+
+  // stacked bar: cost / fees / profit as share of price
+  const p = Math.max(price,0.0001);
+  const seg = (val,color)=>`<span style="width:${Math.max(0,val/p*100)}%;background:${color}"></span>`;
+  $('bar').innerHTML = seg(cost,'var(--brand)') + seg(fees,'#c084fc') + seg(Math.max(profit,0),'var(--good)');
+}
+
+function resetAll(){ $('calc').reset(); recalc(); }
+function copyResult(){
+  const t = `PrintProfit estimate\nTrue cost: ${$('oCost').textContent.replace(/<[^>]+>/g,'')}\nSuggested price: ${$('sellPrice').textContent}\nProfit after fees: ${$('oProfit').textContent} (${$('marginLine').textContent})`;
+  navigator.clipboard?.writeText(t);
+  const b = event.target; const o=b.textContent; b.textContent="Copied ✓"; setTimeout(()=>b.textContent=o,1200);
+}
+recalc();
+</script>
+</body>
+</html>

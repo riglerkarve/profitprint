@@ -1,0 +1,30 @@
+{
+  "updated": "2026-08-01",
+  "note": "Canonical metrics store for the whole portfolio. All values start at 0 because nothing is live yet (accounts are pending human checkpoints). The daily-briefing script and the dashboard both read this file. Never fake a number here — where a platform has no free API, mark it manual.",
+  "currency": "USD",
+  "milestones": { "first_dollar": 1, "first_hundred": 100, "first_thousand": 1000 },
+  "series": [
+    {
+      "date": "2026-08-01",
+      "affiliate_clicks": 0,
+      "affiliate_commission": 0,
+      "product_sales": 0,
+      "product_revenue": 0,
+      "ad_revenue": 0,
+      "tool_visits": 0,
+      "site_visits": 0
+    }
+  ],
+  "sources": [
+    { "name": "Amazon Associates", "kind": "affiliate", "api": "Product Advertising API (locked until 3 qualifying sales); commissions via manual report export until then", "status": "pending-signup", "manual": true },
+    { "name": "Payhip", "kind": "product", "api": "No public sales API on the free plan — manual CSV export", "status": "pending-signup", "manual": true },
+    { "name": "Google AdSense", "kind": "ads", "api": "AdSense Management API (free, after approval)", "status": "pending-signup", "manual": false },
+    { "name": "Cloudflare Web Analytics", "kind": "analytics", "api": "GraphQL Analytics API (free)", "status": "pending-setup", "manual": false }
+  ],
+  "freeTierLimits": [
+    { "resource": "Cloudflare Pages builds", "limit": "500 / month", "used": 0, "unit": "builds", "status": "ok" },
+    { "resource": "GitHub Actions (public repo)", "limit": "unlimited (public)", "used": 0, "unit": "minutes", "status": "ok" },
+    { "resource": "Cloudflare Pages bandwidth", "limit": "unlimited (fair use)", "used": 0, "unit": "GB", "status": "ok" },
+    { "resource": "Supabase free tier (if used by tool)", "limit": "500 MB DB / 2 projects", "used": 0, "unit": "MB", "status": "not-in-use" }
+  ]
+}
