@@ -1,4 +1,2 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://riglerkarve.github.io/profitprint/sitemap-index.xml

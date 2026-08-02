@@ -41,7 +41,7 @@ jobs:
       - name: Build content site
         working-directory: sites/content-site
         run: |
-          npm install
+          npm install --no-audit --no-fund --legacy-peer-deps
           npm run build
 
       - name: Assemble _site
