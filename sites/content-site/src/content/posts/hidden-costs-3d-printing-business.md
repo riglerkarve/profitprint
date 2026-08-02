@@ -46,6 +46,6 @@ Notice what these have in common: **none of them appear on the filament receipt,
 <br><a class="btn" href="../../tool/">Try the calculator →</a>
 </div>
 
-Running more than a handful of products? The [Pro spreadsheet](https://payhip.com/PrintProfit) tracks all of this across your whole shop and rolls it into a monthly profit-and-loss so you can see, in one place, whether the business actually works.
+Running more than a handful of products? The [Pro spreadsheet](https://payhip.com/b/NZ1Xb) tracks all of this across your whole shop and rolls it into a monthly profit-and-loss so you can see, in one place, whether the business actually works.
 
 *This article is guidance, not a promise of profit. Every shop's numbers are different — the point is to measure yours.*

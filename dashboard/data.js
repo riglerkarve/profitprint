@@ -10,7 +10,7 @@ window.PORTFOLIO_DATA = {
   ],
   "sources": [
     { "name": "Amazon Associates", "kind": "affiliate", "status": "pending-signup", "manual": true },
-    { "name": "Payhip", "kind": "product", "status": "pending-signup", "manual": true },
+    { "name": "Payhip", "kind": "product", "status": "live", "manual": true, "url": "https://payhip.com/b/NZ1Xb" },
     { "name": "Google AdSense", "kind": "ads", "status": "pending-signup", "manual": false },
     { "name": "Cloudflare Web Analytics", "kind": "analytics", "status": "pending-setup", "manual": false }
   ],

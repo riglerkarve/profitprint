@@ -4,7 +4,7 @@
 
 **Run it:** open `index.html` in any browser. All math runs client-side; nothing is sent anywhere.
 
-**How it's monetized:** captures high-intent search traffic → upsell CTA to the [Pro spreadsheet](https://payhip.com/PrintProfit); display ads can be added later once the domain has AdSense.
+**How it's monetized:** captures high-intent search traffic → upsell CTA to the [Pro spreadsheet](https://payhip.com/b/NZ1Xb); display ads can be added later once the domain has AdSense.
 
 **Verified:** math checked in-browser — e.g. 45 g @ $22/kg + 6 h + 20 min labor → true cost $8.44, Etsy 50%-margin price $21.52, profit $10.76 after fees. The fee-aware solver is the differentiator.
 

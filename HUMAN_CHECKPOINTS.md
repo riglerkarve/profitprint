@@ -18,10 +18,9 @@ Requires **real name, address, tax info (SSN/EIN), and website + payout method**
 - **You submit the application** — I can't enter tax/identity data.
 - ⚠️ **Deadline rule:** Amazon closes the account if you don't get **3 qualifying sales within 180 days**. So apply *after* the content site is live and starting to get visitors, not before. I'll flag when timing is right.
 
-## CP-3 🔴 Payhip account + payout — *unblocks: product sales (Bet 2)*
-- **You:** create a Payhip account and connect **Stripe or PayPal** to receive money.
-- **Then:** download the CI-built `.xlsx` (from the "Build product spreadsheet" Action run → artifacts) and upload it; paste the listing copy from `product/pricing-spreadsheet/payhip-listing.md`; set price $9.
-- I can't create accounts or connect a payout destination (receiving money).
+## CP-3 🟢 Payhip account + payout — *unblocks: product sales (Bet 2)*
+- ✅ Account created; product **live at https://payhip.com/b/NZ1Xb** (price $9). Upsell links across the tool + content site now point to it.
+- **Remaining (you):** confirm **Stripe/PayPal payout is connected** in Payhip settings so a sale actually pays out. Everything else is done.
 
 ## CP-4 🔴 Google AdSense — *unblocks: ad income (later)*
 - Apply **only after** the content site has ~15–25 real posts + the legal pages live (thin sites get rejected). We're at 3 posts — not yet.
