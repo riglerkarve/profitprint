@@ -14,3 +14,8 @@ __pycache__/
 Thumbs.db
 .vscode/
 .idea/
+
+# npm lockfile deliberately not committed: CI installs with --legacy-peer-deps and
+# the current deploy works; a lockfile with platform-specific optional deps is a
+# known source of cross-platform CI breakage. Revisit if builds start drifting.
+sites/content-site/package-lock.json

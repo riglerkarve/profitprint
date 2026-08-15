@@ -1,7 +1,7 @@
 // AUTO-GENERATED from data/metrics.json by scripts/daily-briefing.mjs — do not hand-edit.
 window.PORTFOLIO_DATA = {
-  "updated": "2026-08-01",
-  "note": "Canonical metrics store for the whole portfolio. All values start at 0 because nothing is live yet (accounts are pending human checkpoints). The daily-briefing script and the dashboard both read this file. Never fake a number here — where a platform has no free API, mark it manual.",
+  "updated": "2026-08-16",
+  "note": "Canonical metrics store for the whole portfolio. Site, calculator, and product listing went live and are verified reachable as of 2026-08-16; revenue is still 0 and traffic is UNMEASURED (no analytics token yet), so no visit rows are recorded rather than guessed. Never fake a number here - where a platform has no free API, mark it manual.",
   "currency": "USD",
   "milestones": {
     "first_dollar": 1,
@@ -48,7 +48,8 @@ window.PORTFOLIO_DATA = {
       "kind": "analytics",
       "api": "GraphQL Analytics API (free)",
       "status": "pending-setup",
-      "manual": false
+      "manual": false,
+      "note": "Blocking: until the token is added, tool_visits/site_visits cannot be recorded at all. Zeros in the series mean unmeasured, not zero traffic."
     }
   ],
   "freeTierLimits": [
@@ -80,5 +81,11 @@ window.PORTFOLIO_DATA = {
       "unit": "MB",
       "status": "not-in-use"
     }
-  ]
+  ],
+  "live": {
+    "site": "https://riglerkarve.github.io/profitprint/",
+    "tool": "https://riglerkarve.github.io/profitprint/tool/",
+    "product": "https://payhip.com/b/NZ1Xb",
+    "verified": "2026-08-16"
+  }
 };

@@ -54,6 +54,7 @@
   .row{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;margin:8px 0}
   .row label{font-size:14px}
   .row .hint{grid-column:1/-1;color:var(--muted);font-size:12px;margin-top:-4px}
+  .fee-note{color:var(--muted);font-size:12px;margin:2px 0 10px;line-height:1.45}
   input[type=number],select{width:130px;padding:8px 10px;border:1px solid var(--line);border-radius:9px;
     background:var(--bg);color:var(--ink);font:inherit;text-align:right}
   select{text-align:left;width:150px}
@@ -129,15 +130,18 @@
         <legend>Selling &amp; margin</legend>
         <div class="row"><label for="channel">Sales channel</label>
           <select id="channel" onchange="applyChannel()">
-            <option value="6.5|0.30|0.029">Etsy (6.5% + $0.30 + 2.9%)</option>
-            <option value="0|0|0.029">Own site / Stripe (2.9% + $0.30)</option>
+            <option value="6.5|0.45|0.03">Etsy — US (6.5% + 3% + $0.45 fixed)</option>
+            <option value="21.5|0.45|0.03">Etsy + Offsite Ads (adds 15%)</option>
+            <option value="13.25|0.30|0">eBay (~13.25% + $0.30, varies by category)</option>
+            <option value="0|0.30|0.029">Own site / Stripe (2.9% + $0.30)</option>
             <option value="0|0|0">Local / cash (no fees)</option>
             <option value="custom">Custom…</option>
           </select>
         </div>
         <div class="row"><label for="feePct">Marketplace fee (%)</label><input id="feePct" type="number" min="0" step="0.1" value="6.5"></div>
-        <div class="row"><label for="feeFlat">Fixed fee per sale ($)</label><input id="feeFlat" type="number" min="0" step="0.01" value="0.30"></div>
-        <div class="row"><label for="payPct">Payment processing (%)</label><input id="payPct" type="number" min="0" step="0.1" value="2.9"></div>
+        <div class="row"><label for="feeFlat">Fixed fee per sale ($)</label><input id="feeFlat" type="number" min="0" step="0.01" value="0.45"></div>
+        <div class="row"><label for="payPct">Payment processing (%)</label><input id="payPct" type="number" min="0" step="0.1" value="3"></div>
+        <p class="fee-note">Fee schedules change. These presets are US rates as of August 2026 — check your channel's current fee page before trusting a price.</p>
         <div class="row"><label for="margin">Target profit margin (%)</label><input id="margin" type="number" min="0" max="95" step="1" value="50"></div>
       </fieldset>
 
