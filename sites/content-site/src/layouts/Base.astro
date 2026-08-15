@@ -3,11 +3,28 @@ export interface Props {
   title: string;
   description: string;
   article?: boolean;
+  published?: Date;
+  modified?: Date;
 }
-const { title, description, article = false } = Astro.props;
+const { title, description, article = false, published, modified } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site).href;
 const year = new Date().getFullYear();
 const base = import.meta.env.BASE_URL.replace(/\/?$/, '/'); // guarantee one trailing slash -> "/profitprint/"
+
+// Article structured data. Costs nothing, and it's how search engines pick up the
+// publish date and author on a domain with no reputation of its own yet.
+const schema = article
+  ? {
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      headline: title.replace(/ — PrintProfit$/, ''),
+      description,
+      mainEntityOfPage: canonical,
+      ...(published ? { datePublished: published.toISOString().slice(0, 10) } : {}),
+      ...(modified ? { dateModified: modified.toISOString().slice(0, 10) } : {}),
+      publisher: { '@type': 'Organization', name: 'PrintProfit' },
+    }
+  : null;
 ---
 <!doctype html>
 <html lang="en">
@@ -20,6 +37,9 @@ const base = import.meta.env.BASE_URL.replace(/\/?$/, '/'); // guarantee one tra
   <meta property="og:title" content={title} />
   <meta property="og:description" content={description} />
   <meta property="og:type" content={article ? 'article' : 'website'} />
+  <meta property="og:url" content={canonical} />
+  <meta name="twitter:card" content="summary" />
+  {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f7a5c'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
   <!--
     Cloudflare Web Analytics (free, privacy-first). HUMAN CHECKPOINT: add your token.

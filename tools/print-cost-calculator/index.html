@@ -148,6 +148,7 @@
       <div class="toolbar">
         <button type="button" onclick="resetAll()">Reset</button>
         <button type="button" onclick="copyResult()">Copy result</button>
+        <button type="button" onclick="copyShareLink(event)">Copy shareable link</button>
       </div>
     </form>
 
@@ -279,6 +280,50 @@ function copyResult(){
   navigator.clipboard?.writeText(t);
   const b = event.target; const o=b.textContent; b.textContent="Copied ✓"; setTimeout(()=>b.textContent=o,1200);
 }
+
+/* Shareable links.
+   Everything still happens in the browser — the numbers ride in the URL fragment,
+   which is never sent to a server. The point is that "here are my actual numbers,
+   check my math" is the form these get shared in, and a bare link to the tool
+   can't carry that. The URL is only rewritten on request, so the default address
+   stays clean. */
+const SHARE_FIELDS = ['spoolPrice','spoolWeight','gramsUsed','printHours','powerW','kwhRate',
+  'printerCost','printerLife','laborMin','laborRate','failRate','packaging',
+  'feePct','feeFlat','payPct','margin'];
+
+function shareHash(){
+  return '#' + SHARE_FIELDS.map(id => `${id}=${encodeURIComponent($(id).value)}`).join('&');
+}
+
+function applyShareHash(){
+  const h = location.hash.replace(/^#/, '');
+  if(!h) return false;
+  let applied = false;
+  for(const pair of h.split('&')){
+    const i = pair.indexOf('=');
+    if(i < 0) continue;
+    const k = pair.slice(0, i), v = decodeURIComponent(pair.slice(i + 1));
+    // Only known numeric fields, so a hand-edited link can't inject anything.
+    if(SHARE_FIELDS.includes(k) && $(k) && v !== '' && isFinite(Number(v))){
+      $(k).value = Number(v);
+      applied = true;
+    }
+  }
+  // Fee fields may no longer match any preset, so don't leave a preset selected
+  // that contradicts what's in the boxes.
+  if(applied) $('channel').value = 'custom';
+  return applied;
+}
+
+function copyShareLink(ev){
+  const url = location.origin + location.pathname + shareHash();
+  history.replaceState(null, '', shareHash());
+  navigator.clipboard?.writeText(url);
+  const b = ev.target; const o = b.textContent;
+  b.textContent = "Link copied ✓"; setTimeout(() => b.textContent = o, 1400);
+}
+
+applyShareHash();
 recalc();
 </script>
 </body>

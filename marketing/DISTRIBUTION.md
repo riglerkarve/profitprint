@@ -70,6 +70,8 @@ Ranked by how likely they are to care, with the honest catch for each.
 
 **Where:** any thread asking about pricing. Post it as a reply to a real question, never as a standalone post.
 
+**Use a pre-filled link.** The calculator has a "Copy shareable link" button that encodes every input into the URL. Punch in *their* numbers from the thread, copy the link, and paste that instead of the bare tool URL. Then the reply isn't "here's a tool, go do work" — it's "here's your answer, and you can change any number in it." That converts dramatically better, and it means the link carries the specific case rather than a generic landing page.
+
 ---
 
 ## Draft 2 — standalone post, only where tool posts are allowed
