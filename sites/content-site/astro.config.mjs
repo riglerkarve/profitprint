@@ -7,4 +7,8 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
   site: 'https://riglerkarve.github.io',
   base: '/profitprint',
+  // Every page carries its own <style>, as it always did. Astro's default ('auto') inlines
+  // only below ~4 KB and the layout stylesheet is now ~5.7 KB, which would have quietly
+  // moved it to a render-blocking /_astro/*.css request on every page.
+  build: { inlineStylesheets: 'always' },
 });

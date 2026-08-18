@@ -6,8 +6,17 @@
 <title>PrintProfit — Portfolio Dashboard</title>
 <meta name="robots" content="noindex" />
 <style>
-  :root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--brand:#1f7a5c;--accent:#eef6f2;--good:#127a4a;--warn:#b45309;--bad:#b91c1c;--grid:#e5e7eb}
-  @media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;--muted:#9aa4b2;--line:#293039;--brand:#2ea77c;--accent:#12261e;--good:#3fb984;--warn:#e0a94a;--bad:#f87171;--grid:#293039}}
+  :root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--brand:#1f7a5c;--accent:#eef6f2;--good:#127a4a;--warn:#b45309;--bad:#b91c1c;--grid:#e5e7eb;
+    --shadow-1:0 1px 2px rgba(0,0,0,.05);--shadow-2:0 1px 2px rgba(0,0,0,.05),0 8px 22px rgba(0,0,0,.09);
+    /* badge text -- second tokens, not changed ones. 12px bold on a 14-16% tint of its own
+     * hue reads 3.96 / 4.14 / 4.35 with --muted / --warn / --brand; one step darker clears
+     * AA at 6.19 / 5.85 / 6.20. Dark mode keeps the plain tokens, which already pass. */
+    --badge-muted:#4b5563;--badge-warn:#92400e;--badge-brand:#176048;--brand-fill:#1f7a5c;
+    /* motion: one ease-out, three durations. Enter uses --t, exit uses --t-fast. */
+    --ease:cubic-bezier(.22,.61,.36,1);--t-fast:140ms;--t:220ms;--t-slow:340ms}
+  @media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;--muted:#9aa4b2;--line:#293039;--brand:#2ea77c;--accent:#12261e;--good:#3fb984;--warn:#e0a94a;--bad:#f87171;--grid:#293039;
+    --badge-muted:#9aa4b2;--badge-warn:#e0a94a;--badge-brand:#2ea77c;--brand-fill:#1f8060; /* white on the brand green: 3.03:1 on #2ea77c, 4.87 on #1f8060 */
+    --shadow-1:0 1px 2px rgba(0,0,0,.4);--shadow-2:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.5)}}
   *{box-sizing:border-box}
   body{margin:0;font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
   .wrap{max-width:1080px;margin:0 auto;padding:22px 16px 60px}
@@ -17,7 +26,20 @@
   .tag{font-size:12px;padding:2px 8px;border-radius:999px;background:var(--accent);color:var(--brand);font-weight:700}
   .grid{display:grid;gap:14px}
   .kpis{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))}
-  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 16px;box-shadow:var(--shadow-1);
+    transition:transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease)}
+  .card:hover{transform:translateY(-2px);box-shadow:var(--shadow-2);border-color:var(--brand);transition-duration:var(--t)}
+  /* entrance: KPI tiles rise in one after another, then each section. The tiles are
+     rendered by JS, so the animation starts the moment they are inserted. Fill is
+     backwards, not both: a forwards fill keeps transform:none pinned after the animation
+     ends, which would silently kill the hover lift on every tile. */
+  .kpi,section:not(:first-of-type){animation:rise var(--t-slow) var(--ease) backwards}
+  .kpi:nth-child(2){animation-delay:40ms}.kpi:nth-child(3){animation-delay:80ms}
+  .kpi:nth-child(4){animation-delay:120ms}.kpi:nth-child(5){animation-delay:160ms}
+  section:nth-of-type(2){animation-delay:60ms}section:nth-of-type(3){animation-delay:120ms}
+  section:nth-of-type(4){animation-delay:180ms}section:nth-of-type(5){animation-delay:240ms}
+  @keyframes rise{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:6px}
   .kpi .label{color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:.05em}
   .kpi .val{font-size:26px;font-weight:800;letter-spacing:-.5px;margin-top:2px;font-variant-numeric:tabular-nums}
   .kpi .sub2{color:var(--muted);font-size:12px}
@@ -26,24 +48,37 @@
   .milestone{margin:10px 0}
   .milestone .top{display:flex;justify-content:space-between;font-size:13px;margin-bottom:4px}
   .track{height:12px;background:var(--line);border-radius:999px;overflow:hidden}
-  .fill{height:100%;background:var(--brand);border-radius:999px}
+  .fill{height:100%;background:var(--brand);border-radius:999px;animation:grow var(--t-slow) var(--ease) backwards;animation-delay:200ms}
+  @keyframes grow{from{width:0}}
+  #chart svg,#chart .empty{animation:fade var(--t) var(--ease) backwards}
+  @keyframes fade{from{opacity:0}to{opacity:1}}
   table{border-collapse:collapse;width:100%;font-size:14px}
-  th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left}
+  th,td{border-bottom:1px solid var(--line);padding:8px 10px;text-align:left;transition:background-color var(--t-fast) var(--ease)}
+  tbody tr:hover td{background-color:var(--accent);transition-duration:var(--t)}
   th{color:var(--muted);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.04em}
   .badge{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px}
   .b-ok{background:rgba(18,122,74,.12);color:var(--good)}
-  .b-warn{background:rgba(180,83,9,.14);color:var(--warn)}
-  .b-pending{background:rgba(107,114,128,.16);color:var(--muted)}
-  .b-manual{background:rgba(180,83,9,.14);color:var(--warn)}
-  .b-api{background:rgba(31,122,92,.14);color:var(--brand)}
+  .b-warn{background:rgba(180,83,9,.14);color:var(--badge-warn)}
+  .b-pending{background:rgba(107,114,128,.16);color:var(--badge-muted)}
+  .b-manual{background:rgba(180,83,9,.14);color:var(--badge-warn)}
+  .b-api{background:rgba(31,122,92,.14);color:var(--badge-brand)}
   .controls{display:flex;gap:6px;margin:0 0 10px}
-  .controls button{font:inherit;font-size:13px;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer}
-  .controls button.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+  .controls button{font:inherit;font-size:13px;padding:5px 12px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);cursor:pointer;
+    transition:background-color var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease),color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease)}
+  .controls button:hover{border-color:var(--brand);transform:translateY(-1px);box-shadow:var(--shadow-1);transition-duration:var(--t)}
+  .controls button:active{transform:translateY(0) scale(.97);box-shadow:none;transition-duration:60ms}
+  .controls button.active{background:var(--brand-fill);color:#fff;border-color:var(--brand-fill)}
   .muted{color:var(--muted)}
   .empty{color:var(--muted);font-style:italic;padding:22px;text-align:center}
   svg{max-width:100%;height:auto}
   .legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted);margin-top:6px}
   .legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;vertical-align:-1px}
+  @media print{.kpi,section,.fill,#chart svg,#chart .empty{animation:none}}
+  @media (prefers-reduced-motion:reduce){
+    *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+    .kpi,section,.fill,#chart svg,#chart .empty{animation:none}
+    .card:hover,.controls button:hover,.controls button:active{transform:none}
+  }
 </style>
 </head>
 <body>
