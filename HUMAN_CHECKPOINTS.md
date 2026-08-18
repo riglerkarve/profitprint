@@ -59,6 +59,48 @@ Right now we cannot tell whether a single person has visited. Every decision aft
 
 ## CP-6 🟡 Legal pages — *unblocks: distribution, and it now blocks it hard*
 
+### VERIFIED 18 Aug evening — everything except your four steps is done and proven
+
+Measured against the live site and the real remote, not against this file:
+
+| Checked | Result |
+| --- | --- |
+| Repository vs remote | **identical** — nothing is unpushed, every fix is deployed |
+| Live buyer guide | `YOUR-ASSOCIATE-TAG` **0**, `Owner note` **0** — the scaffolding is gone from production |
+| Live legal pages | all three still show `DRAFT`; `/about/` still shows `[Owner: …]`; **no contact address anywhere** |
+| Email routing on `hollowmast.com` | **live** — three Cloudflare MX records, and `GDPR@` already receives mail |
+| `finalise-legal-pages.cjs` | still matches all three pages |
+
+**The finaliser was rehearsed end to end and reverted.** It was run for real, the site was
+rebuilt, and the built output was checked: `DRAFT` **0**, `[Owner:` **0**, dates re-stamped to
+2026-08-18, and `/about/` carrying `mailto:printprofit@hollowmast.com`. Privacy and disclosure
+carry no address of their own by design — they point at `/about/`, so the contact chain now
+ends in a real mailbox instead of a note addressed to you. The three source pages were then
+restored and the working tree confirmed clean, because **running it is your review to make**,
+not mine.
+
+So there is no unknown left in this checkpoint. What remains is four actions only you can take.
+
+**1. Finish the Cloudflare route** — Email Routing on `hollowmast.com`, add
+`printprofit@hollowmast.com`, forward to your inbox. The domain already routes, so this is one
+address rule.
+
+**2. Send it a test and watch it arrive.** A saved rule is not a working route. **Check spam:**
+`GDPR@hollowmast.com` went to spam on its first message.
+
+**3. Read the three pages, then run:**
+
+```bash
+node scripts/finalise-legal-pages.cjs --email printprofit@hollowmast.com
+```
+
+**4. Commit and push.** CI builds from source and Pages deploys what is committed, so the
+pages go live on the push. Then CP-10.
+
+**Do not do 3 before 2.** A published contact address that bounces is worse than a missing one:
+it reads as a working route and silently discards the GDPR request or the customer.
+
+
 **Re-checked against the live pages on 18 Aug, and it is worse than "give them a read".**
 
 The privacy policy sends people to `/about/` for contact. `/about/` answered with the literal
