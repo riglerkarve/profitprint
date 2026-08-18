@@ -114,28 +114,30 @@ End $bmp 'etsy-01-hero.png'
 # ------------------------------------------------------------ 2. what's inside
 $bmp = Begin
 Brand 100 90
-Text "What's inside" 100 230 (Font 76 $true) $ink
-Text 'Four tabs. You type in the green cells; everything else calculates.' 100 330 (Font 34 $false) $muted
+Text "What's inside: six tabs" 100 230 (Font 76 $true) $ink
+Text 'You type in the green cells; everything else calculates. USD, GBP and EUR editions in the same download.' 100 330 (Font 34 $false) $muted
 $tabs = @(
-  @('1', 'Start Here', 'Plain-English instructions in three steps, and the one idea that makes the sheet worth having: price is solved backwards so your margin is what is left AFTER fees.'),
-  @('2', 'Settings', 'Enter your printer cost and life, power draw and kWh rate, spool price, labour rate, failure rate and packaging ONCE. Channel presets: Etsy, Etsy + Offsite Ads, eBay, Stripe, cash.'),
-  @('3', 'Pricing', 'Up to 40 products. Grams, hours, hands-on minutes, fail %, channel, target margin in green; material, power, wear, labour, failure allowance, true cost, suggested price, profit and margin in grey.'),
-  @('4', 'Monthly P&L', 'Type units sold per product and see revenue, total cost and profit for the month, pulled straight from the Pricing tab. The number that tells you whether the shop works.')
+  @('1', 'Start Here', 'Plain-English instructions, the one idea that makes the sheet worth having (price is solved backwards so your margin is what is left AFTER fees), guard rails and a changelog.'),
+  @('2', 'Settings', 'Printer cost and life, power and kWh rate, spool price, labour rate, failure rate, packaging, design rate ONCE. Channel presets for Etsy, Etsy + Offsite Ads, eBay, Stripe, cash and a Custom row.'),
+  @('3', 'Pricing', 'Up to 40 products. Only Product, Grams and Print hrs are required; pick the Channel from a dropdown; per-product filament price if you need it. True cost, fee-aware price, profit and a colour-coded margin.'),
+  @('4', 'Monthly P&L', 'Type units sold; every product is already listed. Revenue, fees, cost of goods and take-home for the month.'),
+  @('5', 'Dashboard', 'Average margin against your target, weakest and strongest product, this month in one column, best seller, and a profit-by-product chart.'),
+  @('6', 'Quote', 'Pick a product and quantity, add design hours if any, and a customer-facing quote block writes itself, with your private cost and job margin beside it.')
 )
-$cy = 430
+$cy = 420
 foreach ($t in $tabs) {
-  Card 100 $cy 1800 220
-  Fill (RoundRect 130 ($cy + 30) 160 160 20) $accent
-  TextC $t[0] 210 ($cy + 50) (Font 96 $true) $brand
-  Text $t[1] 330 ($cy + 28) (Font 44 $true) $brandDk
+  Card 100 $cy 1800 150
+  Fill (RoundRect 130 ($cy + 22) 106 106 18) $accent
+  TextC $t[0] 183 ($cy + 30) (Font 66 $true) $brand
+  Text $t[1] 270 ($cy + 18) (Font 38 $true) $brandDk
   # wrap body at ~95 chars
   $words = $t[2] -split ' '; $lines = @(); $cur = ''
   # NB: PowerShell variables are case-insensitive, so this loop var must not be $w (that is the canvas width).
-  foreach ($wd in $words) { if (($cur + ' ' + $wd).Trim().Length -gt 92) { $lines += $cur.Trim(); $cur = $wd } else { $cur = ($cur + ' ' + $wd) } }
+  foreach ($wd in $words) { if (($cur + ' ' + $wd).Trim().Length -gt 118) { $lines += $cur.Trim(); $cur = $wd } else { $cur = ($cur + ' ' + $wd) } }
   if ($cur.Trim()) { $lines += $cur.Trim() }
-  $ly = $cy + 90
-  foreach ($l in $lines) { Text $l 330 $ly (Font 28 $false) $ink; $ly += 38 }
-  $cy += 245
+  $ly = $cy + 66
+  foreach ($l in $lines) { Text $l 270 $ly (Font 24 $false) $ink; $ly += 31 }
+  $cy += 165
 }
 Footer 'Works in Excel, Google Sheets (File > Import) and LibreOffice.'
 End $bmp 'etsy-02-inside.png'

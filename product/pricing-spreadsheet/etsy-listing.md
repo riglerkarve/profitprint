@@ -68,11 +68,13 @@ PrintProfit Pro fixes the maths. It's a clean, editable spreadsheet (Excel, Goog
 
 Then it does the one thing hobby maths gets wrong: it works the price BACKWARDS so your target profit margin is what's left AFTER the fees — not before them.
 
-WHAT'S INSIDE
-• Start Here — plain-English instructions, 3 steps
-• Settings — enter your printer, power rate, labour rate and channel presets once
-• Pricing — up to 40 products; type in the green cells, everything else calculates: true cost, fee-aware suggested price, real margin
-• Monthly P&L — enter units sold and see real revenue, cost and take-home
+WHAT'S INSIDE — six tabs
+• Start Here — plain-English instructions, guard rails, changelog
+• Settings — your machine, power, labour, failure rate, packaging and design rate, once; channel presets for Etsy, Etsy + Offsite Ads, eBay, Stripe, cash and a Custom row
+• Pricing — up to 40 products; only Product, Grams and Print hrs required; Channel from a dropdown; per-product filament price; true cost, fee-aware price, profit, colour-coded margin
+• Monthly P&L — type units sold; every product already listed; revenue, fees, cost of goods, take-home
+• Dashboard — average margin vs target, weakest and strongest product, this month, best seller, profit chart
+• Quote — product + quantity + design hours → a customer-facing quote block, with your private cost and job margin
 
 WORKED EXAMPLE (the sheet's own sample row)
 An articulated dragon: 85 g of filament, 9.5 h print, 15 min hands-on. Filament alone is $1.87 — "× 3" says charge $5.61. True cost with labour, wear, failures and packaging is $8.25. To keep a real 50% margin on Etsy it needs to list at $21.48. That gap is why this sheet exists.
@@ -81,10 +83,10 @@ WHO IT'S FOR
 Hobbyists turning prints into a side income on Etsy, eBay, craft fairs or their own site, who want to know they're actually making money before they scale up. Print farms pricing a whole catalogue.
 
 HONEST NOTE
-This is a tool to help you price with your eyes open. It does NOT guarantee sales or income and cannot — real costs vary (supports, shipping, returns, taxes). Treat suggested prices as a floor to build from, not a promise. Currency symbols are $ by default; change them in one cell.
+This is a tool to help you price with your eyes open. It does NOT guarantee sales or income and cannot — real costs vary (supports, shipping, returns, taxes). Treat suggested prices as a floor to build from, not a promise. Pick the USD, GBP or EUR edition for your currency.
 
 WHAT YOU GET
-1 × .xlsx (works in Excel, Google Sheets via File → Import, LibreOffice). Instant download after purchase. Free updates to this version.
+Three .xlsx files — USD, GBP and EUR editions, each with local fee presets (Excel, Google Sheets via File → Import, LibreOffice). Instant download after purchase. Free updates to this version.
 
 Try the free one-product version first: search "PrintProfit calculator" — it runs in your browser, no signup. This is the whole-shop upgrade.
 
@@ -94,9 +96,8 @@ Digital item — no physical product will be shipped. Because it's an instant do
 ## FAQ (Etsy's FAQ fields)
 
 **Does it work in Google Sheets?** Yes — File → Import → Upload the .xlsx. Formulas carry over.
-**Is it in dollars?** The sample uses $. Every figure comes from cells you set, so type your own
-spool price, power rate and labour rate in £ or € and the whole sheet follows. The symbol is a
-one-cell change on the Settings tab.
+**Is it in dollars?** Pick the edition — USD, GBP and EUR are all in the download, with the right
+symbol and local fee presets. Any other currency: use the closest one and type your own numbers.
 **Which Etsy fees does it use?** US Etsy: 6.5% transaction + 3% + $0.45 payment/listing, and a
 21.5% preset for sales via Offsite Ads. UK Etsy processing is 4% + £0.20 — edit the preset row.
 **Can I add more than 40 products?** Copy the last row down; the formulas fill.
@@ -104,7 +105,7 @@ one-cell change on the Settings tab.
 ## Images (render with `make-listing-images.ps1`)
 
 1. `etsy-01-hero.png` — the cover, re-laid at 4:3
-2. `etsy-02-inside.png` — the four tabs, what each does
+2. `etsy-02-inside.png` — the six tabs, what each does
 3. `etsy-03-example.png` — the dragon: "× 3" vs true cost vs price
 4. `etsy-04-presets.png` — the fee presets table + "works backwards from margin" formula
 
