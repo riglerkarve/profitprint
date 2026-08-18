@@ -51,10 +51,8 @@ Unbeatable detail for miniatures and jewelry, but resin adds cost and labor: con
 
 We link to current listings on Amazon so you can check up-to-date prices, specs, and verified-buyer reviews yourself — the retailer's page is always the source of truth at purchase time:
 
-- *[Budget FDM starter printers on Amazon](https://www.amazon.com/s?k=budget+3d+printer&tag=YOUR-ASSOCIATE-TAG)* — replace `YOUR-ASSOCIATE-TAG` after Amazon Associates approval.
-- *[High-speed CoreXY printers on Amazon](https://www.amazon.com/s?k=corexy+3d+printer&tag=YOUR-ASSOCIATE-TAG)*
-- *[Resin (MSLA) printers on Amazon](https://www.amazon.com/s?k=resin+3d+printer&tag=YOUR-ASSOCIATE-TAG)*
-
-> **Owner note:** the affiliate tag is a placeholder until the Amazon Associates account is approved (a human checkpoint — it needs real tax/identity info). Until then these are plain search links and earn nothing. We'll swap in specific, current model recommendations once we can verify pricing and stock at publish time, rather than name models that may be discontinued.
+- *[Budget FDM starter printers on Amazon](https://www.amazon.com/s?k=budget+3d+printer)*
+- *[High-speed CoreXY printers on Amazon](https://www.amazon.com/s?k=corexy+3d+printer)*
+- *[Resin (MSLA) printers on Amazon](https://www.amazon.com/s?k=resin+3d+printer)*
 
 **Related:** [How to price your prints](../how-to-price-3d-prints/) · [7 costs every seller forgets](../hidden-costs-3d-printing-business/)
