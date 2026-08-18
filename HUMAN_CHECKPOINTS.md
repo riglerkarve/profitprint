@@ -16,17 +16,31 @@ The site is live but does not appear in Google. New pages on a shared `github.io
 - **Why it needs you:** it's tied to your Google account.
 - **Note:** I added `sitemap.xml` and a `Sitemap:` line to `robots.txt`, but crawlers only read `robots.txt` at the *domain root*, which GitHub controls — so on a project-path site, manual submission is the only reliable discovery route.
 
-## CP-5 🟡 Cloudflare Web Analytics — *unblocks: knowing anything at all*
+## CP-5 🟢 Cloudflare Web Analytics — *DONE, verified 18 Aug 2026*
 Right now we cannot tell whether a single person has visited. Every decision after this is a guess until it's fixed.
-- **You:** create a free Cloudflare account, add a Web Analytics site for the Pages URL, copy the token.
+- **DONE 18 Aug 2026.** The Cloudflare account already existed (created for hollowmast.com email routing), so
+  only the site had to be added. Web Analytics site created for hostname `riglerkarve.github.io`; Cloudflare
+  correctly flags it as not-a-Cloudflare-zone and therefore needing the JS snippet, which is the expected path.
+- Token wired into `sites/content-site/src/layouts/Base.astro`, replacing the commented-out stub.
+  **VERIFIED IN THE BUILT OUTPUT, not in the source**: `npm run build` then grepping `dist/` shows the beacon on
+  **11 of 11 pages**. The token is a PUBLIC beacon id — it ships in client HTML by design and is not a secret.
+- No cookie banner needed: Cloudflare Web Analytics sets no cookies and does not track individuals, so
+  `privacy.astro` can keep saying the site sets none. That claim was checked, not assumed.
+- **Data will not appear until the site is redeployed** with the new build. Until then the dashboard reads zero,
+  and a zero here means "not deployed yet", not "nobody visited".
 - **Then:** give me the token — I'll wire it into the site and the calculator (the stub is already in `Base.astro`, commented out).
 - Free, privacy-first, no cookie banner required.
 
 ---
 
-## CP-3 🟡 Payhip payout — *unblocks: actually receiving money*
+## CP-3 🟢 Payhip payout — *DONE, verified 18 Aug 2026*
 - ✅ Account created; product **live at https://payhip.com/b/NZ1Xb** ($9). The calculator and every guide link to it.
-- **Remaining (you):** confirm **Stripe or PayPal payout is connected** in Payhip settings. **If this isn't done, a sale collects money you can't withdraw.** Please verify it before we drive any traffic — this is the difference between a first dollar and a first dollar you can't reach.
+- **VERIFIED 18 Aug 2026** in the live account: `payhip.com/settings/payments` shows **PayPal — Connected**, which
+  accepts PayPal *and* credit/debit cards. Stripe is offered as a second option and is NOT connected; it is optional,
+  not blocking. Default currency USD. **A sale would reach you.**
+- This checkpoint said "confirm payout is connected" and was read for weeks as "payout is not connected". It was
+  UNVERIFIED, not unmet — a different thing, and worth the distinction: the alarm cost more attention than the check.
+- Store setup reads 75%. The remainder is profile and store-front polish, none of it on the payment path.
 
 ## CP-6 🟡 Legal pages final read — *unblocks: going live cleanly*
 The `privacy`, `disclosure`, and `about` pages are drafted and already public. **Read them and add a real contact email on the About page** — an anonymous site with no contact address hurts both trust and any future AdSense review.

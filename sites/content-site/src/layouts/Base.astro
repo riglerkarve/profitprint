@@ -41,39 +41,101 @@ const schema = article
   <meta name="twitter:card" content="summary" />
   {schema && <script type="application/ld+json" set:html={JSON.stringify(schema)} />}
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231f7a5c'/%3E%3Ctext x='16' y='23' font-size='20' font-family='Arial' font-weight='bold' fill='white' text-anchor='middle'%3EP%3C/text%3E%3C/svg%3E" />
-  <!--
-    Cloudflare Web Analytics (free, privacy-first). HUMAN CHECKPOINT: add your token.
-    <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
-      data-cf-beacon='{"token":"YOUR_CF_TOKEN"}'></script>
-  -->
-  <style>
-    :root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--brand:#1f7a5c;--accent:#eef6f2}
-    @media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;--muted:#9aa4b2;--line:#293039;--brand:#2ea77c;--accent:#12261e}}
+  <!-- Google Search Console ownership, added 18 Aug 2026 (CP-9). The HTML-TAG method rather
+       than the html-file one: this is an Astro build, so a tag in the shared layout is under
+       version control and cannot be lost by a rebuild, whereas a loose google*.html in the
+       output directory is exactly the sort of file a clean build quietly drops.
+       Google re-checks periodically -- REMOVING THIS UNVERIFIES THE PROPERTY, silently. -->
+  <meta name="google-site-verification" content="X4rS23cPdOJ7YMg_DfowJDb9IQkzNDhnHthHh-k2Ed4" />
+
+  <!-- Cloudflare Web Analytics. Free, privacy-first, no cookie banner needed: it sets no
+       cookies and does not track individual visitors, which is why privacy.astro can keep
+       saying the site sets none. Token is a PUBLIC beacon id, not a secret -- it is meant to
+       ship in client HTML and identifies the site, not the account.
+       Added 18 Aug 2026 (CP-5). Site: riglerkarve.github.io -->
+  <script defer src="https://static.cloudflareinsights.com/beacon.min.js"
+    data-cf-beacon={JSON.stringify({ token: '273ea4c4d7fd49f8bf932114c654b919' })}></script>
+  <style is:global>
+    /* is:global, deliberately. Astro scopes a component's <style> to that component's own
+     * template, so everything below that styles slot content — .card, .callout, .btn,
+     * .disclosure, article h1/h2, tables — was compiled to .card[data-astro-cid-…] and never
+     * matched the pages that use those classes. This is the layout's stylesheet and it is
+     * meant to reach the pages it wraps.
+     */
+    :root{--bg:#f6f7f9;--card:#fff;--ink:#111827;--muted:#6b7280;--line:#e5e7eb;--brand:#1f7a5c;--accent:#eef6f2;
+      /* --brand-fill is the brand green UNDER WHITE TEXT (logo, cta, .btn) -- a second token,
+       * not a changed one. --brand stays the link colour, which has to be light on the dark
+       * ground; the fill has to be dark under white. In light mode they are the same value.
+       * In dark mode #2ea77c under white measures 3.03:1 and fails AA; #1f8060 is 4.87:1
+       * under white and 3.89:1 against the dark page, so it still reads as the brand. */
+      --brand-fill:#1f7a5c;
+      /* motion + chrome tokens: one ease-out, three durations, one card chrome */
+      --ease:cubic-bezier(.22,.61,.36,1);--t-fast:140ms;--t:220ms;--t-slow:340ms;
+      --r:12px;--r-s:8px;
+      --shadow-1:0 1px 2px rgba(0,0,0,.05);--shadow-2:0 1px 2px rgba(0,0,0,.05),0 8px 22px rgba(0,0,0,.09);
+      --nav-h:64px}
+    @media (prefers-color-scheme:dark){:root{--bg:#0e1116;--card:#161b22;--ink:#e6edf3;--muted:#9aa4b2;--line:#293039;--brand:#2ea77c;--accent:#12261e;--brand-fill:#1f8060;
+      --shadow-1:0 1px 2px rgba(0,0,0,.4);--shadow-2:0 1px 2px rgba(0,0,0,.4),0 10px 26px rgba(0,0,0,.5)}}
     *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
     body{margin:0;font:17px/1.65 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink)}
-    a{color:var(--brand)}
+    a{color:var(--brand);text-underline-offset:2px;text-decoration-thickness:1px;transition:color var(--t-fast) var(--ease),text-underline-offset var(--t-fast) var(--ease),text-decoration-thickness var(--t-fast) var(--ease)}
+    a:hover{text-underline-offset:4px;text-decoration-thickness:2px;transition-duration:var(--t)}
+    a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--brand);outline-offset:3px;border-radius:4px}
+    h1,h2,h3,h4,[id]{scroll-margin-top:calc(var(--nav-h) + 16px)}
     .wrap{max-width:760px;margin:0 auto;padding:0 18px}
-    header.nav{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
-    .logo{width:30px;height:30px;border-radius:8px;background:var(--brand);color:#fff;display:grid;place-items:center;font-weight:800;text-decoration:none}
-    .nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px}
+    header.nav{display:flex;align-items:center;gap:14px;padding:16px 0;border-bottom:1px solid var(--line);flex-wrap:wrap;position:sticky;top:0;z-index:20;background-color:var(--bg)}
+    .logo{width:30px;height:30px;border-radius:var(--r-s);background:var(--brand-fill);color:#fff;display:grid;place-items:center;font-weight:800;text-decoration:none}
+    .nav a{color:var(--ink);text-decoration:none;font-weight:600;font-size:15px;position:relative;transition:color var(--t-fast) var(--ease),transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease),filter var(--t-fast) var(--ease)}
+    .nav a:not(.logo):not(.cta)::after{content:"";position:absolute;left:0;right:0;bottom:-3px;height:2px;border-radius:2px;background:var(--brand);transform:scaleX(0);transform-origin:left;transition:transform var(--t-fast) var(--ease)}
+    .nav a:not(.logo):not(.cta):hover::after{transform:scaleX(1);transition-duration:var(--t)}
+    .nav a:hover{color:var(--brand);transition-duration:var(--t)}
+    /* .logo declares color:#fff but .nav a (0,1,1) outranks .logo (0,1,0), so the P was
+     * really painted in --ink -- 3.5:1 light / 2.6:1 dark -- and .nav a:hover would have
+     * turned it brand-on-brand. Restate at the winning specificity, hover included. */
+    .nav a.logo,.nav a.logo:hover{color:#fff}
+    .nav a.logo:hover{transform:translateY(-1px);box-shadow:var(--shadow-1)}
+    .nav a.logo:active{transform:translateY(0) scale(.96)}
     .nav .spacer{margin-left:auto}
-    .nav a.cta{background:var(--brand);color:#fff;padding:7px 12px;border-radius:8px}
+    .nav a.cta{background:var(--brand-fill);color:#fff;padding:7px 12px;border-radius:var(--r-s)}
+    .nav a.cta:hover{color:#fff;transform:translateY(-1px);box-shadow:var(--shadow-2);filter:brightness(.94);transition-duration:var(--t)}
+    .nav a.cta:active{transform:translateY(0) scale(.97);box-shadow:var(--shadow-1);transition-duration:60ms}
     main{padding:26px 0 10px}
     h1{font-size:clamp(26px,4vw,36px);line-height:1.15;letter-spacing:-.5px;margin:.2em 0 .3em}
     h2{margin-top:1.7em;line-height:1.25}
     article p,article li{color:var(--ink)}
     .meta{color:var(--muted);font-size:14px;margin-bottom:8px}
-    .callout{background:var(--accent);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:10px;padding:14px 16px;margin:22px 0}
-    .callout a.btn{display:inline-block;margin-top:8px;background:var(--brand);color:#fff;text-decoration:none;padding:8px 13px;border-radius:8px;font-weight:700}
-    .disclosure{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:8px;padding:10px 12px;margin:18px 0}
-    .card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:12px 0;text-decoration:none;color:inherit;display:block}
-    .card:hover{border-color:var(--brand)}
-    .card h3{margin:.1em 0 .3em}
+    .callout{background:var(--accent);border:1px solid var(--line);border-left:4px solid var(--brand);border-radius:var(--r);padding:14px 16px;margin:22px 0}
+    .callout a.btn{display:inline-block;margin-top:8px;background:var(--brand-fill);color:#fff;text-decoration:none;padding:8px 13px;border-radius:var(--r-s);font-weight:700;transition:transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease),filter var(--t-fast) var(--ease)}
+    .callout a.btn:hover{transform:translateY(-1px);box-shadow:var(--shadow-2);filter:brightness(.94);transition-duration:var(--t)}
+    .callout a.btn:active{transform:translateY(0) scale(.97);box-shadow:var(--shadow-1);transition-duration:60ms}
+    .disclosure{font-size:13px;color:var(--muted);background:var(--card);border:1px solid var(--line);border-radius:var(--r-s);padding:10px 12px;margin:18px 0}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:16px 18px;margin:12px 0;text-decoration:none;color:inherit;display:block;box-shadow:var(--shadow-1);transition:transform var(--t-fast) var(--ease),box-shadow var(--t-fast) var(--ease),border-color var(--t-fast) var(--ease)}
+    .card:hover{border-color:var(--brand);transform:translateY(-2px);box-shadow:var(--shadow-2);transition-duration:var(--t)}
+    .card:active{transform:translateY(0) scale(.995);box-shadow:var(--shadow-1);transition-duration:60ms}
+    .card h3{margin:.1em 0 .3em;transition:color var(--t) var(--ease)}
+    .card:hover h3{color:var(--brand)}
     .card p{margin:0;color:var(--muted);font-size:15px}
     table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15px}
-    th,td{border:1px solid var(--line);padding:8px 10px;text-align:left}
+    th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;transition:background-color var(--t-fast) var(--ease)}
     th{background:var(--accent)}
+    tbody tr:hover td{background-color:var(--accent);transition-duration:var(--t)}
     footer{border-top:1px solid var(--line);margin-top:40px;padding:20px 0 50px;color:var(--muted);font-size:14px;display:flex;gap:16px;flex-wrap:wrap}
+    /* scroll reveal: opt-in only once JS has marked <html class="js">, and only on
+       elements that were below the fold when the page loaded (the script decides). */
+    html.js .reveal{opacity:0;transform:translateY(12px);transition:opacity var(--t-slow) var(--ease),transform var(--t-slow) var(--ease)}
+    html.js .reveal.in{opacity:1;transform:none}
+    @media print{html.js .reveal{opacity:1;transform:none}}
+    @media (max-width:599px){
+      header.nav{position:static}
+      h1,h2,h3,h4,[id]{scroll-margin-top:16px}
+    }
+    @media (prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}
+      *,*::before,*::after{transition-duration:.01ms!important;animation-duration:.01ms!important;animation-iteration-count:1!important}
+      html.js .reveal{opacity:1;transform:none}
+      .nav a.logo:hover,.nav a.logo:active,.nav a.cta:hover,.nav a.cta:active,.callout a.btn:hover,.callout a.btn:active,.card:hover,.card:active{transform:none}
+    }
   </style>
 </head>
 <body>
@@ -96,5 +158,40 @@ const schema = article
       <a href={`${base}tool/`}>Free tool</a>
     </footer>
   </div>
+  <script is:inline>
+  /* Scroll reveal. Content is fully visible with no JS: only once this runs does <html>
+     get class "js", and only elements that start BELOW the fold get .reveal (hidden until
+     seen). Two safety nets so nothing can stay hidden: on load and after 1.2 s, anything in
+     view is revealed, and if the observer has not called back at all by then it is treated
+     as broken and everything is revealed. Reduced-motion is handled in CSS. */
+  (function(){
+    if (!('IntersectionObserver' in window)) return;
+    var els = [].slice.call(document.querySelectorAll('.card, .callout'))
+      .filter(function(el){ return el.getBoundingClientRect().top > window.innerHeight; });
+    if (!els.length) return;
+    document.documentElement.classList.add('js');
+    els.forEach(function(el){ el.classList.add('reveal'); });
+    var fired = false;
+    var io = new IntersectionObserver(function(entries){
+      fired = true;
+      var i = 0;
+      entries.forEach(function(e){
+        if (!e.isIntersecting) return;
+        e.target.style.transitionDelay = (Math.min(i++, 7) * 45) + 'ms';   /* stagger, capped at 8 */
+        e.target.classList.add('in');
+        io.unobserve(e.target);
+      });
+    }, { rootMargin: '0px 0px -6% 0px', threshold: 0.05 });
+    els.forEach(function(el){ io.observe(el); });
+    function sweep(){
+      els.forEach(function(el){
+        var r = el.getBoundingClientRect();
+        if (!fired || (r.top < window.innerHeight && r.bottom > 0)) el.classList.add('in');
+      });
+    }
+    window.addEventListener('load', sweep);
+    setTimeout(sweep, 1200);
+  })();
+  </script>
 </body>
 </html>
