@@ -1,5 +1,6 @@
 ---
 import Base from '../layouts/Base.astro';
+const base = import.meta.env.BASE_URL.replace(/\/?$/, "/"); // "/profitprint/"
 ---
 <Base title="Privacy Policy — PrintProfit" description="What data PrintProfit does and doesn't collect.">
   <h1>Privacy policy</h1>
@@ -16,5 +17,5 @@ import Base from '../layouts/Base.astro';
   <p>When you click an affiliate link (e.g. to Amazon), that third party may set its own cookies under its own privacy policy. If we add display ads (e.g. Google AdSense) in the future, this policy will be updated to describe them before they go live, including how to opt out of personalized ads.</p>
 
   <h2>Contact</h2>
-  <p>Questions about privacy? Reach us via the <a href="/about/">About</a> page.</p>
+  <p>Questions about privacy? Reach us via the <a href={`${base}about/`}>About</a> page.</p>
 </Base>

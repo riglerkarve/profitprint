@@ -47,7 +47,7 @@ This is a tool to help you price with your eyes open. It does **not** guarantee 
 ### Instant download, free updates
 Get the file immediately after purchase, plus any future improvements to this version free.
 
-**Try the free version first:** the PrintProfit web calculator (one product at a time) at printprofit.pages.dev. Pro adds your whole shop, saved presets, and the monthly P&L.
+**Try the free version first:** the PrintProfit web calculator (one product at a time) at riglerkarve.github.io/profitprint/tool/ — Pro adds your whole shop, saved presets, and the monthly P&L.
 
 ---
 

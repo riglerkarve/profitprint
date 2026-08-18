@@ -97,7 +97,8 @@ lines = [
     ("These are estimates to help you price with your eyes open — not a promise of sales or income. "
      "Costs vary (supports, shipping, returns, taxes). Treat suggested prices as a floor, not a guarantee.", ""),
     ("", ""),
-    ("Free companion tool: the web calculator at printprofit.pages.dev  ·  Guides: the PrintProfit blog.", "muted"),
+    ("Free companion tool: the web calculator at riglerkarve.github.io/profitprint/tool/  ·  "
+     "Guides: riglerkarve.github.io/profitprint/guides/", "muted"),
 ]
 r = 4
 for text, style in lines:
@@ -163,12 +164,19 @@ for name, cell in named.items():
 st["E5"] = "Channel presets"; label(st["E5"])
 for j, htxt in enumerate(["Channel", "Fee %", "Flat $", "Pay %"]):
     cell = st.cell(row=6, column=5 + j, value=htxt); header_fill(cell)
+# Keep these in step with the presets in tools/print-cost-calculator/index.html — the
+# calculator is the free version of this sheet and the two must agree. US rates, Aug 2026:
+# Etsy 6.5% transaction + 3% payment processing + $0.45 fixed ($0.25 processing + $0.20
+# listing); Offsite Ads adds 15% when a sale comes through one; eBay ~13.25% + $0.30.
 channels = [
-    ("Etsy", 0.065, 0.30, 0.029),
+    ("Etsy", 0.065, 0.45, 0.03),
+    ("Etsy + Offsite Ads", 0.215, 0.45, 0.03),
     ("Own site / Stripe", 0.0, 0.30, 0.029),
     ("Local / cash", 0.0, 0.0, 0.0),
-    ("eBay", 0.135, 0.30, 0.0),
+    ("eBay", 0.1325, 0.30, 0.0),
 ]
+st["E13"] = "Fee schedules change — check your channel's fee page before trusting a price."
+muted(st["E13"])
 for i, (nm, fp, fl, pp) in enumerate(channels):
     row = 7 + i
     st.cell(row=row, column=5, value=nm).border = box
@@ -212,12 +220,19 @@ for j, (name, w, kind) in enumerate(cols):
     cell = pr.cell(row=2, column=j + 1, value=name)
     header_fill(cell)
 
-# sample seed rows so the buyer sees it working; they overwrite these
+# sample seed rows so the buyer sees it working; they overwrite these.
+# Percent columns (Fail %, Channel fee %, Pay %, Margin %) hold FRACTIONS — the cell is
+# formatted 0.0% and the formulas multiply the raw value. A seed of 8 here once shipped
+# as an 800% failure rate and a ~$75 dragon; the fix is 0.08, and the assertion below
+# makes that class of mistake fail the build instead of the buyer.
 seed = [
-    ("Articulated dragon", 85, 9.5, 15, 8, 0.065, 0.30, 0.029, 0.50),
-    ("Desk phone stand", 32, 3.0, 8, 5, 0.065, 0.30, 0.029, 0.50),
-    ("Cable clips (x10)", 40, 4.0, 10, 6, 0.065, 0.30, 0.029, 0.55),
+    ("Articulated dragon", 85, 9.5, 15, 0.08, 0.065, 0.45, 0.03, 0.50),
+    ("Desk phone stand", 32, 3.0, 8, 0.05, 0.065, 0.45, 0.03, 0.50),
+    ("Cable clips (x10)", 40, 4.0, 10, 0.06, 0.065, 0.45, 0.03, 0.55),
 ]
+for _row in seed:
+    for _j in (4, 5, 7, 8):
+        assert 0 <= _row[_j] <= 1, f"seed percent out of range in {_row[0]!r}: {_row[_j]} (use a fraction)"
 FIRST = 3
 LAST = 42  # 40 product rows
 for i in range(FIRST, LAST + 1):
