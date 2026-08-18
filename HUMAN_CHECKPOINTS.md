@@ -57,8 +57,46 @@ Right now we cannot tell whether a single person has visited. Every decision aft
   UNVERIFIED, not unmet — a different thing, and worth the distinction: the alarm cost more attention than the check.
 - Store setup reads 75%. The remainder is profile and store-front polish, none of it on the payment path.
 
-## CP-6 🟡 Legal pages final read — *unblocks: going live cleanly*
-The `privacy`, `disclosure`, and `about` pages are drafted and already public. **Read them and add a real contact email on the About page** — an anonymous site with no contact address hurts both trust and any future AdSense review.
+## CP-6 🟡 Legal pages — *unblocks: distribution, and it now blocks it hard*
+
+**Re-checked against the live pages on 18 Aug, and it is worse than "give them a read".**
+
+The privacy policy sends people to `/about/` for contact. `/about/` answered with the literal
+text *"[Owner: add a contact email or form here before publishing.]"*. So **the contact chain
+dead-ended in an instruction addressed to you** — a compliance gap and a credibility gap in
+the same place. All three pages also carry *"DRAFT — pending owner review"* where every
+visitor can read it.
+
+This is why CP-6 comes **before** CP-10, not alongside it. Traffic arriving now is traffic
+spent proving the site is unfinished, and you get one first impression per person.
+
+**Two things only you can do:**
+
+1. Make `printprofit@hollowmast.com` actually receive mail. The Cloudflare routing rule was
+   left half-created. Verify by sending to it and watching it arrive — *a saved rule is not a
+   working route*, and note that `GDPR@hollowmast.com` went to spam on its first message
+   (Mission Control M48), so check the spam folder too.
+2. Read the three pages. Then run:
+
+```bash
+node scripts/finalise-legal-pages.cjs --email printprofit@hollowmast.com --dry
+```
+
+Drop `--dry` to apply. It fills the contact address, clears the DRAFT markers and re-dates the
+pages. **It is a script you run rather than an edit I made on purpose:** clearing "pending
+owner review" is a claim that a review happened, and only you can make that claim. Running it
+is the review. Verified against the current pages — all three anchors match, and it refuses an
+address that is not one.
+
+Afterwards: `cd sites/content-site && npm run build`, then grep `dist` for `DRAFT` and for
+`[Owner:`. Check the artefact, not the source.
+
+**Already fixed for you (18 Aug, commit 97518d9):** the buyer guide was shipping three Amazon
+links tagged `YOUR-ASSOCIATE-TAG`, the sentence "replace YOUR-ASSOCIATE-TAG after Amazon
+Associates approval" as body copy, and an "Owner note:" blockquote. Tags removed rather than
+filled — CP-2 stays deferred, because opening an Associates account before there is traffic
+starts the 180-day/3-sale clock you cannot yet beat. Disclosure reworded from "contain" to
+"may contain", which was otherwise simply false. Rebuilt and verified: 0 occurrences in `dist`.
 
 ## CP-2 ⏸️ Amazon Associates — *unblocks: affiliate income (Bet 1)*
 Requires real name, address, tax info (SSN/EIN), website, and payout method.
@@ -90,6 +128,6 @@ Start with the "answer someone's existing pricing question" tactic. It's the low
 Research, writing, coding, building, wiring CI, drafting copy, generating the daily briefing, fixing bugs, and iterating on what's live.
 
 ### Current blocker summary
-Built ✅ · Deployed ✅ · Measured ❌ · Promoted ❌ · **Earned: $0**
+Built ✅ · Deployed ✅ · Measured ✅ · Promoted ❌ · **Earned: £0**
 
-Two weeks live with no analytics and no distribution. Do **CP-9** and **CP-5** (10 minutes total), confirm **CP-3** payout, then work through `marketing/DISTRIBUTION.md`.
+Analytics landed 18 Aug (CP-5 + CP-9), so the measurement gap is closed and **promotion is the only remaining gap**. CP-3 payout is confirmed. The order from here is CP-6 then CP-10: close the contact gap, then drive traffic. Not the other way round.
