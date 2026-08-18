@@ -96,6 +96,32 @@ finalised, `printprofit@hollowmast.com` proven to forward. Nothing on the site n
   `*.ads.microsoft.com`, open the campaigns URL; or use an Incognito window and I dictate §4.
   Nothing entered so far is lost.
 
+## 3b. BUILT — 18 Aug, ~21:15. Two campaigns, live, awaiting funds
+
+Resumed once the Claude extension was back (it was the extension being paused, not the ad
+blocker alone). Account `PrintProfit (G120TVM4)`. Built exactly as §4 with these recorded
+deviations:
+
+| Setting | As built | vs plan |
+|---|---|---|
+| Campaigns | **A** — `… A - Max Clicks cap 0.50` · **B** — `… B - Enhanced CPC 0.40` (a copy of A) | Plan had one campaign. Owner asked for a concurrent CPC campaign; this UI has no plain Manual CPC, so A = Maximize Clicks with a hard £0.50 max-CPC, B = Enhanced CPC with £0.40 default bid |
+| Budget | **£1/day each** (£2/day total) | same total |
+| Max CPC | A £0.50 (plan £0.40) | Microsoft's own estimate for similar campaigns was £0.34–£2.86 avg CPC; £0.40 risked no delivery, so no learning |
+| Locations | US, UK, Canada, **Ireland** (the default bundle) | plan said Australia; Ireland is fine, not worth the extra clicks |
+| Ad distribution | "Microsoft sites and select traffic" | closest available to Bing/AOL/Yahoo-only; Audience ads cannot be excluded in this UI |
+| AI Max | all four toggles OFF (text assets, final URL expansion, search-term matching, brand) | as plan |
+| Keywords | 19 (13 phrase + 6 exact) | as plan |
+| Negatives | 16 phrase, per campaign (copied to B) | as plan |
+| Ad | 15 headlines / 4 descriptions, H1+H2 pinned, ad strength "Good" after pinning ("Excellent" unpinned) | plan's 15, plus none of Microsoft's AI suggestions ("Simplify Your Profits Now!" was deleted — an implied income claim) |
+| Sitelinks | 4 as planned, UTM'd | as plan |
+| End date | none set (the UI fought it); **the prepay balance is the hard stop** | plan wanted 21 days — irrelevant with prepay |
+
+**Caveat, stated plainly:** A and B share keywords in one account, so Microsoft shows one ad
+per query. This is "which strategy buys cheaper clicks", not a clean split test.
+
+**What is left is yours: fund it.** Billing → prepay → top up **£20** via PayPal (Microsoft
+adds 20% VAT → £24 charged). Ads serve after editorial review (~48 h). Then §5.
+
 ## 4. The campaign — build exactly this
 
 You do: create the account (Microsoft account, business details, payment card). **I don't
