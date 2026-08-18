@@ -172,6 +172,9 @@ Rebuilt `build_spreadsheet.py` (CI-built, LibreOffice-verified, uploaded to Payh
 - Payhip: preview PDF (one page per tab, real render of the USD file), six-tab gallery image,
   description and SEO text updated. Calculator upsell copy now describes this product.
 
+**Owner opened the USD file in LibreOffice and signed off v2.0 (18 Aug, ~23:00): "I like that
+version."** v2.0 is the baseline; changes from here need a reason and a version bump.
+
 Note for the future: `check-delivered-xlsx.cjs` asserts USD numbers only; GBP/EUR "fail" it by
 design. Extend it per edition if a buyer ever reports a wrong number in £ or €.
 
