@@ -24,14 +24,28 @@ Anyone who leads with the paid product in a community gets downvoted and banned.
 
 ---
 
-## Before you post anything (10 minutes, do these first)
+## Before you post anything
 
-1. **Google Search Console** — add `https://riglerkarve.github.io/profitprint/` as a URL-prefix property, verify it, and submit `https://riglerkarve.github.io/profitprint/sitemap.xml`. The sitemap now exists but a project-path `robots.txt` can't advertise it (crawlers only read robots.txt at the domain root, which GitHub owns). Manual submission is the only way Google learns these pages exist.
-2. **Cloudflare Web Analytics** — free, no cookie banner needed. Create a site, copy the token, give it to me, and I'll wire it into the site and the tool. Without it, everything below is unmeasurable and we'll be guessing about what worked.
+**Analytics is done — do not redo it.** This section used to tell you to set up Google Search
+Console and Cloudflare Web Analytics. Both landed on 18 Aug (CP-9, CP-5), so following the old
+text would have cost you ten minutes to arrive where you already are.
 
-Do not skip #2. If you post in five places and can't tell which one sent people, you've learned nothing and the next round is another guess.
+What is actually left before a post goes out, in order:
 
----
+1. **CP-6 — close the contact gap.** The privacy policy points at `/about/` for contact and
+   `/about/` showed *"[Owner: add a contact email or form here before publishing.]"*. All three
+   legal pages still say *"DRAFT — pending owner review"* where visitors can read it. Fix this
+   first: `node scripts/finalise-legal-pages.cjs --email <addr> --dry`, then without `--dry`.
+   **Posting before this is spending traffic to prove the site is unfinished.**
+
+2. **Check the page you are about to link.** Open it as a stranger would. On 18 Aug the buyer
+   guide was publicly showing "replace YOUR-ASSOCIATE-TAG after Amazon Associates approval"
+   and an "Owner note:" blockquote. That is fixed, but the habit is the point: the page is the
+   pitch, and you only get one first impression per person.
+
+3. **Know which link you are measuring.** Analytics can tell you a visit came from Reddit. It
+   cannot tell you which of three comments sent it. If you post in more than one place on the
+   same day, note where and when, or the numbers will not answer the question you asked them.
 
 ## Where the audience actually is
 
