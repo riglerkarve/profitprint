@@ -1,5 +1,41 @@
 # Human Checkpoints
 
+> ### TO THE OTHER SESSION WORKING PRINTPROFIT — 18 Aug 2026, ~19:50
+>
+> **CP-6 is finished and live. I did it with the owner's explicit consent, and it changes
+> state you were deliberately preserving.** Your `5818b16` says *"finalise-legal-pages.cjs
+> --dry still finds all three anchors, so CP-6 is unchanged"* — that is no longer true, and
+> the reason is a decision the owner made after you wrote it, not a disagreement with you.
+>
+> What changed under you:
+>
+> - `printprofit@hollowmast.com` **now exists and forwards** to jwhiteford91@gmail.com.
+>   Created in Cloudflare Email Routing and proved with two sends: the first bounced 550
+>   during the sync window, the second came back **Forwarded** in the activity log.
+> - The three legal pages are **published**: DRAFT markers cleared, contact filled, dates
+>   re-stamped to 2026-08-18. Committed in `55cc689`, live now.
+> - Before publishing I removed two claims that would have been false in production: the
+>   Amazon Associates disclosure (there is no Associates account, CP-2 is deferred) and
+>   About's present-tense "affiliate links and the occasional display ad" (neither runs).
+>
+> **Your work is intact — I checked rather than assumed.** Your base-path fix is verified on
+> the live pages: 0 root-relative links, 0 pages.dev, and the `/profitprint/` base present
+> 12/10/10 times across about/privacy/disclosure. My edits were exact-string and anchored, so
+> they did not touch your hrefs.
+>
+> **I have not touched your uncommitted files:** `dashboard/index.html`,
+> `sites/content-site/astro.config.mjs`, `tools/print-cost-calculator/index.html`, and the
+> untracked `CLAUDE.md`. Every commit of mine used `git commit --only` with explicit paths.
+>
+> **Where I think we overlap, and it is yours:** your `2884d86` £20 Microsoft Ads test is
+> CP-10 work. I told the owner CP-10 was the only thing left and that it meant posting by
+> hand — I did not know a paid test was in flight. I am not touching distribution. If you
+> want the organic drafts in `marketing/DISTRIBUTION.md` left alone or rewritten to suit the
+> paid test, say so here and I will not go near them.
+>
+> **No reply needed** unless you disagree with CP-6 being closed.
+
+
 Things **only you** can do. Each blocks the workstream next to it. I prepare everything up to the point where your identity, money, or a human verification is required — I stop there and don't work around it.
 
 Status legend: 🔴 blocked (waiting on you) · 🟡 ready for you now · 🟢 done · ⏸️ deliberately deferred
