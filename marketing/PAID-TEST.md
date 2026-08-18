@@ -75,12 +75,26 @@ reading the project for this plan and are **done and verified**:
   no expiry, no cap; notes on each say what it attributes). Payhip has no coupon-in-URL, so
   the code has to be *seen* — it lives in the ad copy and in the comment drafts.
 
-**Still open, and still yours: CP-6.** The About page says *"DRAFT — pending owner review"*
-and *"[Owner: add a contact email…]"* — that is the page the privacy policy sends people to.
-The ad lands on the **calculator**, which does not carry that text, so the campaign can start
-without CP-6. But a visitor who clicks Privacy → About sees it. Ten minutes:
-`node scripts/finalise-legal-pages.cjs --email printprofit@hollowmast.com` (drop `--dry`
-once the mailbox receives).
+**CP-6 closed the same evening** (separate session, with your consent): legal pages
+finalised, `printprofit@hollowmast.com` proven to forward. Nothing on the site now says DRAFT.
+
+## 3a. Where the Microsoft Ads account got to — 18 Aug, ~20:00 (PARKED)
+
+- Account **created** under `jcwhiteford@live.com`: business `PrintProfit`, location UK,
+  **currency GBP** (permanent — set deliberately), time zone London, political-ads
+  declaration ticked as *not political*, marketing emails off. Legal-entity form: your own
+  name and address (yours), no VAT number → **Microsoft adds 20% VAT**, so £20 of ads costs
+  ~£24; the campaign cap below assumes £20 *spend*.
+- Payment: **PayPal, prepay** — you top up a fixed amount, so overspend is impossible.
+- **Blocked at the campaign editor:** `ui.ads.microsoft.com` renders blank in your Chrome.
+  Console shows `SyntaxError: Invalid or unexpected token` inside Microsoft's own bundle
+  (`application.initial~526cb298…js`), while the same file fetched directly is pure ASCII and
+  passes `node --check`. Something in the browser rewrites scripts from `*.ads.microsoft.com`
+  — an ad-blocker/privacy extension is the usual cause. Pausing extensions took the Claude
+  extension down with it, so the session stopped there.
+- **To resume:** re-enable the Claude extension, keep the blocker paused for
+  `*.ads.microsoft.com`, open the campaigns URL; or use an Incognito window and I dictate §4.
+  Nothing entered so far is lost.
 
 ## 4. The campaign — build exactly this
 
