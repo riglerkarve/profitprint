@@ -66,13 +66,22 @@ dashboard read *Syncing*, the second came back **Forwarded** in Cloudflare's act
 **Reading the pages before clearing "pending owner review" caught two claims that must not
 have been published**, which is exactly what that marker is for:
 
--  asserted *"As an Amazon Associate, PrintProfit earns from qualifying
-  purchases"* — there is **no Associates account**; CP-2 is deferred on purpose.
--  said the site stays free on *"affiliate links and the occasional display ad"* —
-  neither is running. The live guide carries plain search links and the ad gate is dormant.
+- `disclosure.astro` asserted *"As an Amazon Associate, PrintProfit earns from qualifying
+  purchases"* — there is **no Associates account**; CP-2 is deferred on purpose, because
+  opening one starts a 180-day / 3-sale clock a traffic-less site cannot beat. That sentence
+  is Amazon's required disclosure *for Associates*; publishing it without an account asserts
+  a commercial relationship that does not exist, on the one page whose job is disclosure.
+- `about.astro` said the site stays free on *"affiliate links and the occasional display ad"*
+  — neither is running. The live guide carries plain Amazon search links with no tag, and the
+  consent gate ships dormant with no ad provider configured.
 
-Both rewritten to state the intent honestly. Verified live:  0,  0, the
-Associate claim 0, and  carrying .
+Both were rewritten to state the intent honestly rather than deleted, so the pages still
+explain how the site is meant to pay for itself.
+
+Verified against the LIVE pages, not the source: `DRAFT` 0, `[Owner:` 0, the Associate claim
+0, and `/about/` carrying `mailto:printprofit@hollowmast.com`. Privacy and disclosure carry
+no address of their own by design — they point at `/about/`, so the contact chain ends in a
+mailbox that has been proven to receive.
 
 **CP-10 is now the only thing between this site and its first pound.**
 
