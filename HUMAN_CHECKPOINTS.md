@@ -57,7 +57,25 @@ Right now we cannot tell whether a single person has visited. Every decision aft
   UNVERIFIED, not unmet — a different thing, and worth the distinction: the alarm cost more attention than the check.
 - Store setup reads 75%. The remainder is profile and store-front polish, none of it on the payment path.
 
-## CP-6 🟡 Legal pages — *unblocks: distribution, and it now blocks it hard*
+## CP-6 🟢 Legal pages — *DONE and live, 18 Aug 2026*
+
+**Completed with the owner's explicit consent.** printprofit@hollowmast.com was created in
+Cloudflare Email Routing and **proved** to forward: the first test bounced 550 while the
+dashboard read *Syncing*, the second came back **Forwarded** in Cloudflare's activity log.
+
+**Reading the pages before clearing "pending owner review" caught two claims that must not
+have been published**, which is exactly what that marker is for:
+
+-  asserted *"As an Amazon Associate, PrintProfit earns from qualifying
+  purchases"* — there is **no Associates account**; CP-2 is deferred on purpose.
+-  said the site stays free on *"affiliate links and the occasional display ad"* —
+  neither is running. The live guide carries plain search links and the ad gate is dormant.
+
+Both rewritten to state the intent honestly. Verified live:  0,  0, the
+Associate claim 0, and  carrying .
+
+**CP-10 is now the only thing between this site and its first pound.**
+
 
 ### VERIFIED 18 Aug evening — everything except your four steps is done and proven
 
@@ -187,6 +205,6 @@ Start with the "answer someone's existing pricing question" tactic. It's the low
 Research, writing, coding, building, wiring CI, drafting copy, generating the daily briefing, fixing bugs, and iterating on what's live.
 
 ### Current blocker summary
-Built ✅ · Deployed ✅ · Measured ✅ · Promoted ❌ · **Earned: £0**
+Built ✅ · Deployed ✅ · Measured ✅ · Legal ✅ · Promoted ❌ · **Earned: £0**
 
 Analytics landed 18 Aug (CP-5 + CP-9), so the measurement gap is closed and **promotion is the only remaining gap**. CP-3 payout is confirmed. The order from here is CP-6 then CP-10: close the contact gap, then drive traffic. Not the other way round.
