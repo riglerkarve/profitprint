@@ -157,6 +157,23 @@ Staying on free subdomains. Worth revisiting if traffic ever justifies it: a rea
 
 ---
 
+## CP-11 🟡 The £20 Microsoft Ads test — *decided 18 Aug, needs your account*
+
+You authorised a one-off £20 ad budget and chose Microsoft Ads search (the reasoning, the
+arithmetic, the exact campaign and the kill criteria are all in `marketing/PAID-TEST.md`).
+Everything that could be prepared is prepared: keywords, negatives, ad copy checked against
+the character limits, landing URL with UTM, coupon `SEARCH20` live on Payhip for attribution.
+
+**Yours:** sign up at ads.microsoft.com (Microsoft account, business details, card, any
+verification code) and read the promotional-offer screen — if it says spend £20 → get credit,
+take it. Then hand me the tab and I build the campaign in it for your approval before it
+goes live. Expected outcome, stated in advance: **0–1 sales**; the £20 buys the first real
+numbers for click-through, calculator→Payhip, and purchase. Review at £20 spent or day 21.
+
+**Before it goes live, write down the starting counters** so movement is evidence:
+Payhip product views (**3** at 19:30 on 18 Aug), coupon uses (0/0/0), Cloudflare `/tool/`
+visits from bing (0).
+
 ## CP-10 🟡 Distribution — *unblocks: the first dollar*
 **This is the actual blocker now, and it isn't a checkpoint I can clear for you.** The site is live, the math is right, and no one knows it exists.
 

@@ -19,6 +19,12 @@ An autonomous builder experiment: three small, zero-cash online-income bets arou
 >
 > [`HUMAN_CHECKPOINTS.md`](HUMAN_CHECKPOINTS.md) still holds what is genuinely yours:
 > payout details, and any account step. **$0 earned remains the honest headline** and is not softened here.
+>
+> **18 Aug, evening:** the paid spreadsheet on Payhip was rebuilt after its seed rows were
+> found to show an 800% failure rate; the listing gained a cover image, a marketplace category
+> and three attribution coupons. A one-off **£20 Microsoft Ads search test** was authorised —
+> the first spend on the project, bounded and with written kill criteria in
+> [`marketing/PAID-TEST.md`](marketing/PAID-TEST.md). Expected outcome, stated up front: 0–1 sales.
 
 ## The three bets
 | # | Bet | What it is | Folder | Monetization |
@@ -48,7 +54,7 @@ Zero paid services anywhere. Hosting: GitHub Pages or Cloudflare Pages. Analytic
 This repo was scaffolded on a machine **without Node or Python**, so the Astro build and the spreadsheet generator were **not executed locally** — CI runs them. The two single-file static apps (calculator, dashboard) **were** verified in a browser. Review the first CI runs.
 
 ## Guardrails honored
-$0 spend · no fake reviews · no plagiarized/scraped content · no ToS-violating tactics · **no guaranteed-income claims anywhere** in user-facing copy.
+$0 spend (one recorded exception: a bounded £20 ad test, 18 Aug 2026 — see `marketing/PAID-TEST.md`) · no fake reviews · no plagiarized/scraped content · no ToS-violating tactics · **no guaranteed-income claims anywhere** in user-facing copy.
 
 ## Reporting cadence
 - **Daily:** automated briefing in `reports/`.

@@ -84,6 +84,12 @@ Ranked by how likely they are to care, with the honest catch for each.
 
 **Where:** any thread asking about pricing. Post it as a reply to a real question, never as a standalone post.
 
+**Coupon = attribution.** Payhip coupons `REDDIT20` (Reddit and forum replies) and `GROUPS20`
+(Facebook groups, Discord, Etsy seller forums) exist, 20% off, no expiry. If a reply mentions the
+Pro sheet at all, put the code in — it is the only way a sale can be traced back to a channel,
+because Payhip has no coupon-in-URL. `SEARCH20` is reserved for the paid search test
+(`PAID-TEST.md`); don't reuse it here or the two channels blur.
+
 **Use a pre-filled link.** The calculator has a "Copy shareable link" button that encodes every input into the URL. Punch in *their* numbers from the thread, copy the link, and paste that instead of the bare tool URL. Then the reply isn't "here's a tool, go do work" — it's "here's your answer, and you can change any number in it." That converts dramatically better, and it means the link carries the specific case rather than a generic landing page.
 
 ---
@@ -98,7 +104,7 @@ Ranked by how likely they are to care, with the honest catch for each.
 >
 > Free, no signup, no account, runs entirely in your browser: [link]
 >
-> I also sell a $9 spreadsheet version for people running a whole shop, but the calculator is complete on its own and I'd rather you just use it. Happy to add features if there's something missing — tell me what you'd want.
+> I also sell a $9 spreadsheet version for people running a whole shop (code REDDIT20 takes 20% off if you want it), but the calculator is complete on its own and I'd rather you just use it. Happy to add features if there's something missing — tell me what you'd want.
 
 **Rules:** disclose the paid version (as above) — hiding it is what gets people banned. Check the sub's self-promo rule first, and if it requires mod approval, message the mods rather than posting and hoping.
 
