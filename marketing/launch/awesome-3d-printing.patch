@@ -1,0 +1,18 @@
+--- awesome.md	2026-08-18 20:10:58.404384500 +0100
++++ awesome.patched.md	2026-08-18 20:11:30.568432000 +0100
+@@ -391,6 +391,7 @@
+ - [OctoEverywhere] - Remotely monitor your OctoPrint.
+ - [Polyvia3D] - Browser-based 3D file converter, viewer, and repair tool supporting OBJ, STL, GLB, PLY, and 3MF. Runs locally via WebAssembly.
+ - [PNGtoSTL] - Browser-based image-to-STL workspace for reliefs, lithophanes, logo badges, and heightmap surfaces, with real downloadable STL examples.
++- [PrintProfit Calculator] - Free, no-signup pricing calculator for people who sell prints: labor, machine wear, failure rate, packaging and Etsy/eBay fees, solved backwards from a target margin.
+ - [QRCode2STL] - Browser-based generator for 3D printable QR codes, Spotify codes, and text tags.
+ - [Ritn3D] - Convert a floor plan into a 3D printable house model.
+ - [SimplexGen] - Browser-based AI image-to-3D generator with a full mesh editing toolkit (simplify, smooth, repair, retopology, boolean, UV) and a 3D-print prep editor.
+@@ -417,6 +418,7 @@
+ [Open Filament Database]: https://github.com/OpenFilamentCollective/open-filament-database
+ [Polyvia3D]: https://polyvia3d.com
+ [PNGtoSTL]: https://pngtostl.net
++[PrintProfit Calculator]: https://riglerkarve.github.io/profitprint/tool/
+ [PROLED3D]: https://proled3d.com
+ [QRCode2STL]: https://qrcode2stl.printer.tools
+ [Ritn3D]: https://www.ritn3d.com
