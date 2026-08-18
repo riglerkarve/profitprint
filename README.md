@@ -2,7 +2,23 @@
 
 An autonomous builder experiment: three small, zero-cash online-income bets around **one niche — pricing & costing for people who sell 3D prints** — plus a dashboard and an automated daily briefing. Built to test whether a single-operator, $0-spend project can earn anything real. It's honest about the odds (see the research doc): realistic outcomes are **tens to low-hundreds of dollars/month, slow to start, and possibly $0**.
 
-> **Status:** everything is **built and locally verified**, **nothing is deployed**, **$0 earned** — deployment and earning are blocked on [`HUMAN_CHECKPOINTS.md`](HUMAN_CHECKPOINTS.md) (accounts + payout are yours to set up).
+> **Status (checked 18 Aug 2026):** all three bets are **LIVE to the public**, **$0 earned**.
+> The blocker is **distribution, not deployment** — nothing links to any of it yet.
+>
+> | Bet | Where | Checked |
+> |---|---|---|
+> | 1 · Content site | <https://riglerkarve.github.io/profitprint/> + 6 guides | all  |
+> | 2 · Digital product | <https://payhip.com/b/NZ1Xb> |  |
+> | 3 · Free micro-tool | <https://riglerkarve.github.io/profitprint/tool/> |  |
+>
+> This line previously read *"everything is built and locally verified, **nothing is
+> deployed**"*. That was true when written (1 Aug) and had been wrong since deployment,
+> in the one place a stranger looks first — it understated the project rather than
+> overstating it. Corrected openly rather than quietly, and re-verified by HTTP rather
+> than by reading the deploy config.
+>
+>  still holds what is genuinely yours: payout details, and any
+> account step. **$0 earned remains the honest headline** and is not softened here.
 
 ## The three bets
 | # | Bet | What it is | Folder | Monetization |
