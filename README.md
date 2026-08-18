@@ -7,9 +7,9 @@ An autonomous builder experiment: three small, zero-cash online-income bets arou
 >
 > | Bet | Where | Checked |
 > |---|---|---|
-> | 1 · Content site | <https://riglerkarve.github.io/profitprint/> + 6 guides | all  |
-> | 2 · Digital product | <https://payhip.com/b/NZ1Xb> |  |
-> | 3 · Free micro-tool | <https://riglerkarve.github.io/profitprint/tool/> |  |
+> | 1 · Content site | <https://riglerkarve.github.io/profitprint/> + 6 guides | all `200` |
+> | 2 · Digital product | <https://payhip.com/b/NZ1Xb> | `200` |
+> | 3 · Free micro-tool | <https://riglerkarve.github.io/profitprint/tool/> | `200` |
 >
 > This line previously read *"everything is built and locally verified, **nothing is
 > deployed**"*. That was true when written (1 Aug) and had been wrong since deployment,
@@ -17,8 +17,8 @@ An autonomous builder experiment: three small, zero-cash online-income bets arou
 > overstating it. Corrected openly rather than quietly, and re-verified by HTTP rather
 > than by reading the deploy config.
 >
->  still holds what is genuinely yours: payout details, and any
-> account step. **$0 earned remains the honest headline** and is not softened here.
+> [`HUMAN_CHECKPOINTS.md`](HUMAN_CHECKPOINTS.md) still holds what is genuinely yours:
+> payout details, and any account step. **$0 earned remains the honest headline** and is not softened here.
 
 ## The three bets
 | # | Bet | What it is | Folder | Monetization |
