@@ -151,6 +151,30 @@ Both pages a paid click meets were reworked once the money was in, and verified 
 
 Baseline for §5 is unchanged by all this: Payhip still **3 views, 0 orders** at 22:00.
 
+## 3d. The product itself, v2.0 — 18 Aug, ~22:50 (after "make it more premium")
+
+Rebuilt `build_spreadsheet.py` (CI-built, LibreOffice-verified, uploaded to Payhip, old file deleted):
+
+- **Channel dropdown** on Pricing with fees looked up from Settings; **per-product filament £/kg**;
+  Fail % / Margin % blank fall back to defaults — only Product, Grams, Print hrs are required.
+- **Monthly P&L covered only the 3 seed rows** — a real defect; now all 40, with a Fees column.
+- New **Dashboard** (average margin vs target, weakest/strongest product, month totals, best
+  seller, profit chart) and **Quote** tab (product × qty + design hours → customer-facing block,
+  seller's private cost/margin beside it — three of the seven reply-kit threads were people
+  struggling to quote).
+- Guard rails: percent cells reject a bare "8"; formulas locked, no password; margin cells
+  red/amber/green; print setup; doc properties; version + changelog on Start Here.
+- **USD, GBP, EUR editions** in one download, each with regional Etsy/eBay/Stripe presets. USD
+  maths unchanged (dragon 8.25 → 21.48 → 50%, `check-delivered-xlsx.cjs` passes); GBP dragon
+  cross-checked against `price-link.cjs` (6.51 → 17.54 → 50.0%).
+- Two things caught only by rendering the built file: `_xlfn.` prefix needed for MINIFS/MAXIFS
+  (Dashboard read 0.0% without it), and the checker tripping on the *prose* "800%" — reworded.
+- Payhip: preview PDF (one page per tab, real render of the USD file), six-tab gallery image,
+  description and SEO text updated. Calculator upsell copy now describes this product.
+
+Note for the future: `check-delivered-xlsx.cjs` asserts USD numbers only; GBP/EUR "fail" it by
+design. Extend it per edition if a buyer ever reports a wrong number in £ or €.
+
 ## 4. The campaign — build exactly this
 
 You do: create the account (Microsoft account, business details, payment card). **I don't
