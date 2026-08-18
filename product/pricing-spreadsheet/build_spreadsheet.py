@@ -192,7 +192,7 @@ def pct_validation(ws, rng, what):
     dv = DataValidation(
         type="decimal", operator="between", formula1="0", formula2="1", allow_blank=True,
         showErrorMessage=True, errorTitle="Enter it as a percentage",
-        error=f"Type {what} as a percentage, e.g. 8% — not 8. (8 would mean 800%.)",
+        error=f"Type {what} as a percentage, e.g. 8% — not 8. (a bare 8 would be read as eight hundred percent.)",
         showInputMessage=True, promptTitle=what, prompt="Type with the % sign, e.g. 8%",
     )
     ws.add_data_validation(dv)
@@ -254,7 +254,7 @@ def build(code: str, ed: dict) -> Path:
         ("Adding '50% markup' is not a 50% margin once Etsy takes its cut. This sheet does it right.", ""),
         ("", ""),
         ("Guard rails (so it stays right)", "label"),
-        ("•  Percent cells only accept percentages — type 8%, not 8. (An early version let '8' through as 800%. Never again.)", ""),
+        ("•  Percent cells only accept percentages — type 8%, not 8. (An early version let a bare 8 through as eight hundred percent. Never again.)", ""),
         ("•  Formula cells are locked against accidental edits. To change a formula: Review → Unprotect Sheet. There is no password.", ""),
         ("•  Margins colour themselves: red under 20%, amber under your target, green at or above it.", ""),
         ("•  Fee presets are dated. Fee schedules change — check your channel's fee page before trusting a price.", ""),
@@ -271,7 +271,7 @@ def build(code: str, ed: dict) -> Path:
         (f"v{VERSION} ({VERSION_DATE}) — channel dropdown with fee lookup; per-product filament price; Fail % and Margin % "
          "fall back to your defaults; P&L covers all 40 products (was 3); new Dashboard and Quote tabs; percent "
          "validation; locked formulas; margin colouring; USD/GBP/EUR editions.", "muted"),
-        ("v1.1 (18 Aug 2026) — fixed seed rows that showed an 800% failure rate; Etsy preset aligned with the calculator.", "muted"),
+        ("v1.1 (18 Aug 2026) — fixed seed rows that showed an eight-hundred-percent failure rate; Etsy preset aligned with the calculator.", "muted"),
         ("v1.0 (1 Aug 2026) — first release.", "muted"),
     ]
     r = 5
