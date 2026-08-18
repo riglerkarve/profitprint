@@ -10,11 +10,26 @@ Status legend: 🔴 blocked (waiting on you) · 🟡 ready for you now · 🟢 d
 
 ## Do these two first (10 minutes, together they unblock everything else)
 
-## CP-9 🟡 Google Search Console — *unblocks: ever being found in search*
-The site is live but does not appear in Google. New pages on a shared `github.io` subdomain with no inbound links can take months to get indexed on their own.
-- **You:** add `https://riglerkarve.github.io/profitprint/` as a **URL-prefix property**, verify it (the HTML-file method needs a file committed — tell me and I'll add it), then submit the sitemap: `https://riglerkarve.github.io/profitprint/sitemap.xml`
-- **Why it needs you:** it's tied to your Google account.
-- **Note:** I added `sitemap.xml` and a `Sitemap:` line to `robots.txt`, but crawlers only read `robots.txt` at the *domain root*, which GitHub controls — so on a project-path site, manual submission is the only reliable discovery route.
+## CP-9 🟢 Google Search Console — *DONE, verified 18 Aug 2026*
+
+The site can now be found in search, and its indexing problems become visible rather than silent.
+
+- URL-prefix property `https://riglerkarve.github.io/profitprint/`, verified by the **HTML-tag** method rather
+  than the html-file one Google recommends. A tag in the shared Astro layout is version-controlled and survives a
+  rebuild; a loose `google*.html` in the output directory is the kind of file a clean build quietly drops.
+  **Removing the tag unverifies the property, silently** — the tag carries that warning inline in `Base.astro`.
+- Deployed as `bf93202`; tag confirmed live on the running site 90 seconds after the Pages build, counted as an
+  element rather than as a substring.
+- **VERIFIED** — the property Overview loads and reports "Processing data, please check again in a day or so",
+  which is what a freshly-verified property says. Checked by loading the property, not by watching a dialog.
+
+  A trap worth keeping: after pressing VERIFY the dialog **closes whether it succeeded or not**. I read a closing
+  dialog as success once and had to correct it. Load the property to find out — data means yes, "you don’t have
+  access to this property" means no.
+
+- **Nothing will appear for a day or so**, and a zero before then means "not crawled yet", not "not found".
+  Next useful step once data arrives: submit the sitemap (`sitemap.xml` already exists and is referenced from
+  `robots.txt`).
 
 ## CP-5 🟢 Cloudflare Web Analytics — *DONE, verified 18 Aug 2026*
 Right now we cannot tell whether a single person has visited. Every decision after this is a guess until it's fixed.
