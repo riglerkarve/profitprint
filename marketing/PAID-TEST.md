@@ -119,8 +119,12 @@ deviations:
 **Caveat, stated plainly:** A and B share keywords in one account, so Microsoft shows one ad
 per query. This is "which strategy buys cheaper clicks", not a clean split test.
 
-**What is left is yours: fund it.** Billing → prepay → top up **£20** via PayPal (Microsoft
-adds 20% VAT → £24 charged). Ads serve after editorial review (~48 h). Then §5.
+**FUNDED 18 Aug, ~21:40 — £40 gross, £33.33 net of VAT.** Your call at the PayPal screen; it is
+double the £20 in §1 and the balance-zero banner is gone. Nothing else changes: £2/day total
+still, so the pot lasts **~16–17 days of full delivery** instead of ~10, and every threshold in
+§6 that said "£20 spent" now reads **£33.33 spent** — the review point moves, the criteria do
+not. Break-even re-based: **5.7 sales** (7.1 with the coupon). Ads serve after editorial review
+(~48 h). Then §5.
 
 ## 4. The campaign — build exactly this
 
@@ -232,7 +236,7 @@ finding about the calculator, not about the market.
 
 ## 6. Kill criteria — decided now, so they aren't argued later
 
-Review at **£20 spent or day 21**, whichever first. Report clicks, CTR, CPC, Bing→calculator
+Review at **£33.33 spent (the funded pot) or day 21**, whichever first. Report clicks, CTR, CPC, Bing→calculator
 visits, Payhip views delta, coupon uses, sales. Then exactly one of:
 
 - **≥ 1 sale** → the funnel converts from cold search. A second £20 is justified, same
@@ -243,8 +247,8 @@ visits, Payhip views delta, coupon uses, sales. Then exactly one of:
   on the calculator before more spend. No more ads.
 - **CTR < 1% across the board** → the query doesn't want what we're offering. Stop; the
   free-comment channel is the path.
-- **< 30 clicks in 21 days** → Bing volume is too thin to learn from. Stop; the £20 left is
-  Reddit's or Etsy's.
+- **< 30 clicks in 21 days** → Bing volume is too thin to learn from. Stop; whatever is left
+  of the pot is Reddit's or Etsy's.
 
 Whatever the outcome it gets written to `data/metrics.json` (a `paid` row) and the daily
 briefing, not just to memory.
