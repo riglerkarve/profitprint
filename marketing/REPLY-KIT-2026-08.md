@@ -15,12 +15,16 @@ says so and tells them to change it in the link — that honesty is the whole pi
 Coupon codes: `REDDIT20` appears **only** in #7, the one thread where the paid sheet is the
 actual answer. Everywhere else the free calculator is the answer and the sheet isn't mentioned.
 
+**Posting log:** #1 posted 18 Aug ~23:20 · #2 posted 18 Aug ~23:35 · #3–#7 held for later days (one or two a day). Attribution: Cloudflare `/tool/` referrer reddit.com from those times; the calculator shows REDDIT20 to those arrivals; Payhip coupon uses tell the rest.
+
 Threads were found on 18 Aug via a Reddit mirror (Reddit blocks direct fetches); verified
 open at that time. Check each is still live and hasn't been answered identically before you post.
 
 ---
 
 ## 1. r/3Dprintingbusiness — "How are you all pricing your prints" (3 Aug, receptive OP)
+
+**POSTED 18 Aug 2026 ~23:20 (owner's account, as drafted, free link only — sub rule 2 forbids promoting products; rule 5 allows links).** Watch: Cloudflare `/tool/` referrer reddit.com, calculator shows REDDIT20 on arrival.
 
 **Thread:** https://www.reddit.com/r/3Dprintingbusiness/comments/1vei9yx/how_are_you_all_pricing_your_prints_looking_to/
 (Also crossposted to r/3Dprinting — reply on the r/3Dprintingbusiness copy; r/3Dprinting's Rule 3 tolerates a helpful comment with a link but it's the stricter room.)
@@ -51,6 +55,8 @@ open at that time. Check each is still live and hasn't been answered identically
 ---
 
 ## 2. r/3DprintEntrepreneurs — "How do I price my items?" (3 Aug, **zero replies**)
+
+**POSTED 18 Aug 2026 ~23:35 (owner's account, as drafted; it was still the first reply on the thread).**
 
 **Thread:** https://www.reddit.com/r/3DprintEntrepreneurs/comments/1veedee/how_do_i_price_my_items/
 
