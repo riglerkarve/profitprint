@@ -244,6 +244,14 @@ I've drafted rules-compliant posts in `marketing/DISTRIBUTION.md` — comment re
 
 Start with the "answer someone's existing pricing question" tactic. It's the lowest-risk and historically the highest-converting.
 
+**18 Aug evening — this is now paste, not research.** `marketing/REPLY-KIT-2026-08.md` holds
+**seven live threads** (found and verified that evening) each with a reply written around the
+asker's own numbers and a calculator link pre-filled with them. Post #1 and #2 first, one or two
+a day, from your account, in your words. `scripts/price-link.cjs` makes the next one a
+one-liner. Also ready: `marketing/LAUNCH-KIT.md` (a prepared PR to the 1,930-star
+awesome-3d-printing list — say the word and I open it from your GitHub) and
+`product/pricing-spreadsheet/etsy-listing.md` + four listing images if you ever open the shop.
+
 ---
 
 ### What I keep doing without asking
