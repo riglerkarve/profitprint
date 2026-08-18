@@ -403,20 +403,21 @@ def build(code: str, ed: dict) -> Path:
             if j == 7:
                 money_fmt(cell)
         # ---- calculated (mirror of the free calculator's recalc(); keep them in step) ----
-        material = f'=IF($B{R}="",0,$B{R}*IF($H{R}="",SPOOL_PRICE/SPOOL_WEIGHT,$H{R}/1000))'
-        power    = f'=IF($C{R}="",0,POWER_W/1000*$C{R}*KWH)'
-        deprec   = f'=IF($C{R}="",0,PRINTER_COST/PRINTER_LIFE*$C{R})'
-        labor    = f'=IF($D{R}="",0,$D{R}/60*LABOR_RATE)'
-        failall  = f'=(I{R}+J{R}+K{R})*IF($E{R}="",FAIL_RATE,$E{R})'
-        packag   = f'=IF($A{R}="",0,PACKAGING)'
-        truecost = f'=I{R}+J{R}+K{R}+L{R}+M{R}+N{R}'
-        feepct   = f'=IF($F{R}="",0,IFERROR(VLOOKUP($F{R},PRESETS,2,FALSE),0))'
-        flatfee  = f'=IF($F{R}="",0,IFERROR(VLOOKUP($F{R},PRESETS,3,FALSE),0))'
-        paypct   = f'=IF($F{R}="",0,IFERROR(VLOOKUP($F{R},PRESETS,4,FALSE),0))'
+        blank    = f'$A{R}=""'
+        material = f'=IF({blank},"",IF($B{R}="",0,$B{R}*IF($H{R}="",SPOOL_PRICE/SPOOL_WEIGHT,$H{R}/1000)))'
+        power    = f'=IF({blank},"",IF($C{R}="",0,POWER_W/1000*$C{R}*KWH))'
+        deprec   = f'=IF({blank},"",IF($C{R}="",0,PRINTER_COST/PRINTER_LIFE*$C{R}))'
+        labor    = f'=IF({blank},"",IF($D{R}="",0,$D{R}/60*LABOR_RATE))'
+        failall  = f'=IF({blank},"",(I{R}+J{R}+K{R})*IF($E{R}="",FAIL_RATE,$E{R}))'
+        packag   = f'=IF({blank},"",PACKAGING)'
+        truecost = f'=IF({blank},"",I{R}+J{R}+K{R}+L{R}+M{R}+N{R})'
+        feepct   = f'=IF({blank},"",IF($F{R}="",0,IFERROR(VLOOKUP($F{R},PRESETS,2,FALSE),0)))'
+        flatfee  = f'=IF({blank},"",IF($F{R}="",0,IFERROR(VLOOKUP($F{R},PRESETS,3,FALSE),0)))'
+        paypct   = f'=IF({blank},"",IF($F{R}="",0,IFERROR(VLOOKUP($F{R},PRESETS,4,FALSE),0)))'
         marginr  = f'IF($G{R}="",TARGET_MARGIN,$G{R})'
-        price    = f'=IF($A{R}="",0,(O{R}+Q{R})/MAX(0.02,(1-{marginr}-P{R}-R{R})))'
-        profit   = f'=IF(S{R}=0,0,S{R}-O{R}-(S{R}*(P{R}+R{R})+Q{R}))'
-        margin   = f'=IF(S{R}=0,0,T{R}/S{R})'
+        price    = f'=IF({blank},"",(O{R}+Q{R})/MAX(0.02,(1-{marginr}-P{R}-R{R})))'
+        profit   = f'=IF({blank},"",IF(S{R}=0,0,S{R}-O{R}-(S{R}*(P{R}+R{R})+Q{R})))'
+        margin   = f'=IF({blank},"",IF(S{R}=0,0,T{R}/S{R}))'
         formulas = [material, power, deprec, labor, failall, packag, truecost, feepct, flatfee, paypct, price, profit, margin]
         for k, f in enumerate(formulas):
             col = 9 + k
@@ -441,9 +442,9 @@ def build(code: str, ed: dict) -> Path:
 
     # margin colouring: red < 20%, amber < target, green >= target (only where a price exists)
     rng = f"U{FIRST}:U{LAST}"
-    pr.conditional_formatting.add(rng, FormulaRule(formula=[f'AND(S{FIRST}>0,U{FIRST}<0.2)'], fill=RED_FILL, font=Font(color=BAD, bold=True), stopIfTrue=True))
-    pr.conditional_formatting.add(rng, FormulaRule(formula=[f'AND(S{FIRST}>0,U{FIRST}<TARGET_MARGIN)'], fill=AMBER_FILL, font=Font(color=WARN, bold=True), stopIfTrue=True))
-    pr.conditional_formatting.add(rng, FormulaRule(formula=[f'S{FIRST}>0'], fill=GREEN_FILL, font=Font(color=GOOD, bold=True)))
+    pr.conditional_formatting.add(rng, FormulaRule(formula=[f'AND(ISNUMBER(S{FIRST}),S{FIRST}>0,U{FIRST}<0.2)'], fill=RED_FILL, font=Font(color=BAD, bold=True), stopIfTrue=True))
+    pr.conditional_formatting.add(rng, FormulaRule(formula=[f'AND(ISNUMBER(S{FIRST}),S{FIRST}>0,U{FIRST}<TARGET_MARGIN)'], fill=AMBER_FILL, font=Font(color=WARN, bold=True), stopIfTrue=True))
+    pr.conditional_formatting.add(rng, FormulaRule(formula=[f'AND(ISNUMBER(S{FIRST}),S{FIRST}>0)'], fill=GREEN_FILL, font=Font(color=GOOD, bold=True)))
 
     wb.defined_names.add(DefinedName("PRODUCT_LIST", attr_text=f"Pricing!$A${FIRST}:$A${LAST}"))
     pr.page_setup.orientation = "landscape"
@@ -475,12 +476,13 @@ def build(code: str, ed: dict) -> Path:
         band = i % 2 == 1
         a = pl.cell(row=R, column=1, value=f'=IF(Pricing!A{src}="","",Pricing!A{src})'); calc_cell(a, band)
         u = pl.cell(row=R, column=2, value=(0 if i < len(SEED) else None)); input_cell(u, band)
-        pe = pl.cell(row=R, column=3, value=f'=IF(Pricing!A{src}="",0,Pricing!S{src})'); calc_cell(pe, band); money_fmt(pe)
-        ce = pl.cell(row=R, column=4, value=f'=IF(Pricing!A{src}="",0,Pricing!O{src})'); calc_cell(ce, band); money_fmt(ce)
-        rev = pl.cell(row=R, column=5, value=f'=IF(B{R}="",0,B{R}*C{R})'); calc_cell(rev, band); money_fmt(rev)
-        fee = pl.cell(row=R, column=6, value=f'=IF(B{R}="",0,B{R}*(C{R}*(Pricing!P{src}+Pricing!R{src})+Pricing!Q{src}))'); calc_cell(fee, band); money_fmt(fee)
-        tc = pl.cell(row=R, column=7, value=f'=IF(B{R}="",0,B{R}*D{R})'); calc_cell(tc, band); money_fmt(tc)
-        pf = pl.cell(row=R, column=8, value=f'=E{R}-F{R}-G{R}'); calc_cell(pf, band); money_fmt(pf)
+        pa = f'Pricing!A{src}=""'
+        pe = pl.cell(row=R, column=3, value=f'=IF({pa},"",Pricing!S{src})'); calc_cell(pe, band); money_fmt(pe)
+        ce = pl.cell(row=R, column=4, value=f'=IF({pa},"",Pricing!O{src})'); calc_cell(ce, band); money_fmt(ce)
+        rev = pl.cell(row=R, column=5, value=f'=IF({pa},"",IF(B{R}="",0,B{R}*C{R}))'); calc_cell(rev, band); money_fmt(rev)
+        fee = pl.cell(row=R, column=6, value=f'=IF({pa},"",IF(B{R}="",0,B{R}*(C{R}*(Pricing!P{src}+Pricing!R{src})+Pricing!Q{src})))'); calc_cell(fee, band); money_fmt(fee)
+        tc = pl.cell(row=R, column=7, value=f'=IF({pa},"",IF(B{R}="",0,B{R}*D{R}))'); calc_cell(tc, band); money_fmt(tc)
+        pf = pl.cell(row=R, column=8, value=f'=IF({pa},"",E{R}-F{R}-G{R})'); calc_cell(pf, band); money_fmt(pf)
         pf.font = Font(name=FONT, bold=True, color=INK)
     num_validation(pl, f"B{PL_FIRST}:B{PL_LAST}", "Units sold")
     TOT = PL_LAST + 1
@@ -522,10 +524,10 @@ def build(code: str, ed: dict) -> Path:
     kpi(7, 2, "Average margin (priced products)", f'=IFERROR(AVERAGEIF({P},">0",{U}),0)', "pct")
     kpi(8, 2, "Your target margin", "=TARGET_MARGIN", "pct")
     kpi(9, 2, "Products below target margin", f'=COUNTIFS({P},">0",{U},"<"&TARGET_MARGIN)')
-    kpi(10, 2, "Weakest margin", f'=IFERROR(MINIFS({U},{P},">0"),0)', "pct")
-    kpi(11, 2, "  …which product", f'=IFERROR(INDEX({A},MATCH(MINIFS({U},{P},">0"),{U},0)),"—")')
-    kpi(12, 2, "Strongest margin", f'=IFERROR(MAXIFS({U},{P},">0"),0)', "pct")
-    kpi(13, 2, "  …which product", f'=IFERROR(INDEX({A},MATCH(MAXIFS({U},{P},">0"),{U},0)),"—")')
+    kpi(10, 2, "Weakest margin", f'=IFERROR(_xlfn.MINIFS({U},{P},">0"),0)', "pct")
+    kpi(11, 2, "  …which product", f'=IFERROR(INDEX({A},MATCH(_xlfn.MINIFS({U},{P},">0"),{U},0)),"—")')
+    kpi(12, 2, "Strongest margin", f'=IFERROR(_xlfn.MAXIFS({U},{P},">0"),0)', "pct")
+    kpi(13, 2, "  …which product", f'=IFERROR(INDEX({A},MATCH(_xlfn.MAXIFS({U},{P},">0"),{U},0)),"—")')
 
     db["E5"] = "This month  (from Monthly P&L)"; h2(db["E5"])
     kpi(6, 5, "Month", "='Monthly P&L'!G1")
