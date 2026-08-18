@@ -126,6 +126,31 @@ still, so the pot lasts **~16–17 days of full delivery** instead of ~10, and e
 not. Break-even re-based: **5.7 sales** (7.1 with the coupon). Ads serve after editorial review
 (~48 h). Then §5.
 
+## 3c. Funnel pages improved AFTER funding — 18 Aug, ~22:00
+
+Both pages a paid click meets were reworked once the money was in, and verified on the live URLs:
+
+**Landing page (`/tool/`, commit `b1993c2`):**
+- **It was never being measured.** The Cloudflare beacon was a commented stub on the calculator; the
+  token had only gone into the Astro layout. Now live on `/tool/` — same public token, no cookies.
+  Every visit count for `/tool/` before 18 Aug ~21:50 is *unmeasured*, not zero.
+- `og:image` / Twitter card (1200×630, `make-og-image.ps1` → `/profitprint/img/og-calculator.png`),
+  so reply-kit links and shares render a preview card.
+- Pro upsell box rebuilt: thumbnail of the sheet, "$9 one-time", and an **attribution coupon shown on
+  arrival** — `SEARCH20` from `?utm_source=bing` (the ad URL), `REDDIT20` when the referrer is
+  Reddit, `GROUPS20` for Facebook/Discord/forums; organic search referrers deliberately get nothing so
+  paid and organic stay separable in Payhip. Nothing stored or sent. 11 source/referrer cases pass
+  against the real function; the ad URL shows SEARCH20 live, a plain visit shows no code.
+
+**Product page (Payhip `NZ1Xb`, edited in your Chrome):**
+- Gallery: cover + the three listing images (what's inside / worked example / presets + honest note).
+- Description gained: WORKED EXAMPLE (the dragon, 5.61 → 8.25 → 21.48), WHAT YOU GET, QUESTIONS
+  PEOPLE ASK (Sheets import, currency, Etsy fees incl. UK, >40 products) and a **14-day refund line**;
+  the duplicate "instant download" sentence removed. SEO description filled (was empty).
+- Verified as a stranger: all four images in the public HTML, every new section present, $9.00.
+
+Baseline for §5 is unchanged by all this: Payhip still **3 views, 0 orders** at 22:00.
+
 ## 4. The campaign — build exactly this
 
 You do: create the account (Microsoft account, business details, payment card). **I don't
