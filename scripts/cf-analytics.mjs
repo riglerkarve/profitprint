@@ -17,8 +17,32 @@ const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const METRICS_PATH = join(ROOT, 'data', 'metrics.json');
 const ENDPOINT = 'https://api.cloudflare.com/client/v4/graphql';
 const ACCOUNT_ID = process.env.CF_ACCOUNT_ID || '9d7e2f9ebb96ee3b3cee3b1b80b37156';
-const SITE_TAG = process.env.CF_SITE_TAG || '22c0da83544c4442b3cb06a4cadabc12';
 const args = process.argv.slice(2);
+
+// The Web Analytics beacon token is public by design, and it is the site tag used to scope
+// RUM data. Read the two delivered sources rather than trusting a session note: a stale ID
+// would return another site's data while looking like a successful import.
+const beaconSources = [
+  join(ROOT, 'tools', 'print-cost-calculator', 'index.html'),
+  join(ROOT, 'sites', 'content-site', 'src', 'layouts', 'Base.astro'),
+];
+const beaconToken = (file) => {
+  // The calculator has JSON escaped inside an HTML attribute (`{\"token\": \"…\"}`),
+  // while Astro uses an object literal (`{ token: '…' }`). Accept those two delivered forms,
+  // but no generic 32-character string elsewhere in the file.
+  const token = readFileSync(file, 'utf8').match(/(?:token|\\?["']token\\?["'])\s*:\s*\\?["']([a-f0-9]{32})/i)?.[1];
+  if (!token) throw new Error(`no Cloudflare beacon token found in ${file}`);
+  return token;
+};
+const beaconTokens = beaconSources.map(beaconToken);
+if (new Set(beaconTokens).size !== 1) {
+  throw new Error(`shipped Cloudflare beacon tokens disagree: ${beaconTokens.join(', ')}`);
+}
+const SHIPPED_SITE_TAG = beaconTokens[0];
+const SITE_TAG = process.env.CF_SITE_TAG || SHIPPED_SITE_TAG;
+if (SITE_TAG !== SHIPPED_SITE_TAG) {
+  throw new Error('CF_SITE_TAG disagrees with the shipped Cloudflare beacon; update the beacon first or remove the override');
+}
 
 const valueAfter = (flag) => {
   const index = args.indexOf(flag);
