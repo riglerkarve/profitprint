@@ -94,14 +94,14 @@ EDITIONS = {
         sym="£", name="pound sterling", fmt='"£"#,##0.00',
         spool=20, kwh=0.25, printer=300, labor=12, packaging=0.60, design_rate=25,
         channels=[
-            ("Etsy (UK)",                 0.0682, 0.36, 0.04),   # 6.5% + 0.32% regulatory; 20p + 16p listing
-            ("Etsy + Offsite Ads (UK)",   0.2182, 0.36, 0.04),
+            ("Etsy (UK)",                 0.0698, 0.36, 0.04),   # 6.5% + 0.48% regulatory (raised from 0.32% on 22 Jun 2026); 20p + 16p listing
+            ("Etsy + Offsite Ads (UK)",   0.2198, 0.36, 0.04),
             ("eBay (UK, business)",       0.128,  0.30, 0.0),
             ("Own site / Stripe (UK)",    0.0,    0.20, 0.015),
             ("Local / cash",              0.0,    0.0,  0.0),
             ("Custom (edit me)",          0.0,    0.0,  0.0),
         ],
-        fee_note="UK rates, Aug 2026. Etsy = 6.5% + 0.32% regulatory operating fee, 4% + 20p payment, ~16p listing.",
+        fee_note="UK rates, Aug 2026 (Etsy regulatory fee raised 0.32%->0.48% on 22 Jun 2026). Etsy = 6.5% + 0.48% regulatory operating fee, 4% + 20p payment, ~16p listing.",
     ),
     "EUR": dict(
         sym="€", name="euro", fmt='"€"#,##0.00',

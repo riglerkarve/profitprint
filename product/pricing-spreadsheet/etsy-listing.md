@@ -21,9 +21,10 @@ up to 10, 2000 px shortest side (4:3 renders best) · digital file ≤ 20 MB · 
 
 ## Price
 
-**£6.99** (≈ the Payhip $9). Etsy takes 6.5% + 4% + £0.20 + 0.32% regulatory + £0.16 listing
-≈ £1.11 → **~£5.88 net**, within a few pence of Payhip. Don't undercut Payhip: one price
-everywhere, or the two listings train buyers to hunt for the cheaper one.
+**£6.99** (≈ the Payhip $9). Etsy takes 6.5% + 4% + £0.20 + 0.48% regulatory (raised from 0.32%
+on 22 Jun 2026) + £0.16 listing ≈ £1.13 → **~£5.86 net**, within a few pence of Payhip. Don't
+undercut Payhip: one price everywhere, or the two listings train buyers to hunt for the
+cheaper one.
 
 ## Tags (13, all ≤ 20 chars)
 
