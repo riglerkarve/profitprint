@@ -19,6 +19,17 @@
 'use strict';
 
 const TOOL = 'https://riglerkarve.github.io/profitprint/tool/';
+const REPLY_KIT_FIXTURES = require('./fixtures/reply-kit-pricing.json');
+
+const HELP = `Usage:
+  node scripts/price-link.cjs grams=85 hours=9.5 labor=15 channel=etsy
+  node scripts/price-link.cjs --selftest
+  node scripts/price-link.cjs --check-reply-kit
+
+Keys: spool=22 spoolWeight=1000 grams=45 hours=6 watts=120 kwh=0.17 printer=300
+      life=4000 labor=20 rate=18 fail=8 pack=0.75 margin=50
+      channel=etsy|etsyoffsite|ebay|stripe|cash
+      or feePct= feeFlat= payPct= for a custom fee preset.`;
 
 const CHANNELS = {
   etsy:        { feePct: 6.5,   feeFlat: 0.45, payPct: 3,   label: 'Etsy (6.5% + 3% + $0.45)' },
@@ -86,8 +97,42 @@ function link(o) {
 
 const $ = (n) => '$' + n.toFixed(2);
 
+function checkReplyKit() {
+  const tolerance = 1e-8;
+  let failures = 0;
+  for (const fixture of REPLY_KIT_FIXTURES) {
+    const result = calc(parseArgs(fixture.args));
+    const checks = [];
+    for (const [field, expected] of Object.entries(fixture.expect)) {
+      const actual = field === 'saleMarginPct'
+        ? ((fixture.salePrice - result.cost) / fixture.salePrice) * 100
+        : result[field];
+      if (Math.abs(actual - expected) > tolerance) {
+        checks.push(`${field}: expected ${expected}, got ${actual}`);
+      }
+    }
+    if (checks.length) {
+      failures++;
+      console.log(`FAIL ${fixture.label} — ${checks.join('; ')}`);
+    } else {
+      console.log(`OK   ${fixture.label}`);
+    }
+  }
+  console.log(failures ? `reply-kit fixtures FAILED: ${failures}` : `reply-kit fixtures OK: ${REPLY_KIT_FIXTURES.length}`);
+  process.exit(failures ? 1 : 0);
+}
+
 function main() {
-  const o = parseArgs(process.argv.slice(2));
+  const input = process.argv.slice(2);
+  if (input.includes('--help') || input.includes('-h')) {
+    console.log(HELP);
+    return;
+  }
+  if (input.includes('--check-reply-kit')) {
+    checkReplyKit();
+    return;
+  }
+  const o = parseArgs(input);
   if (o.selftest) {
     // The sheet's seed row and the cover image: dragon 85 g / 9.5 h / 15 min / 8% / Etsy / 50%.
     const r = calc(parseArgs(['grams=85', 'hours=9.5', 'labor=15', 'fail=8', 'channel=etsy', 'margin=50']));

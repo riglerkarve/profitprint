@@ -1,0 +1,28 @@
+[
+  {
+    "label": "#3 Stripe 100 g / 8 h example",
+    "args": ["grams=100", "hours=8", "labor=20", "printer=700", "channel=stripe", "margin=50"],
+    "expect": { "cost": 10.814256, "price": 23.597146496815287 }
+  },
+  {
+    "label": "#4 Etsy 100 g / 8 h example",
+    "args": ["grams=100", "hours=8", "labor=20", "printer=1000", "channel=etsy", "margin=50"],
+    "expect": { "cost": 11.462256, "price": 29.412977777777777 }
+  },
+  {
+    "label": "#5 whistle cash-sale margin example",
+    "args": ["grams=3", "hours=0.2", "labor=0.5", "printer=300", "pack=0.05", "channel=cash", "margin=50"],
+    "salePrice": 0.5,
+    "expect": { "cost": 0.2918864, "saleMarginPct": 41.62272 }
+  },
+  {
+    "label": "#5 Pikachu cash example",
+    "args": ["grams=60", "hours=4", "labor=10", "printer=300", "channel=cash", "margin=50"],
+    "expect": { "cost": 5.587728, "price": 11.175456 }
+  },
+  {
+    "label": "#6 PETG bracket cash example",
+    "args": ["spool=25", "grams=40", "hours=1", "labor=10", "printer=300", "channel=cash", "margin=50"],
+    "expect": { "cost": 4.933032, "price": 9.866064 }
+  }
+]
