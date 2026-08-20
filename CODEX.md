@@ -116,22 +116,32 @@ here; do not push.
 
 ---
 
-## Second brain — where this work is tracked, and the one honest gap
+## Second brain — where this work is tracked
 
-Same ruling as Mission Control's `CODEX.md` already gives, and it applies here without
-modification: **file it where it is actually read.** `brain_notes` is the owner's channel for
-annotating the Claude memory store, not a general inbox. The real second brain for your work is
-the handover chain you already use — `node "../mission-control/tools/handover.cjs" <file> --title
-"Codex Worker"` — which is central regardless of which repo you were working in.
+**Corrected 20 Aug, same day this file was written — the original text here was wrong.** It said
+your findings for this project had nowhere to land but a handover, because
+`mission-control/server/trackers.js` has no parser for `HUMAN_CHECKPOINTS.md`. That's still true,
+but it doesn't matter the way it implied: **you already file straight to the backlog.**
+`POST /api/todo/items` with `project: "income-portfolio"` works from any repo — it's an HTTP call
+to the Mission Control server, not something that needs a tracker parser or even this repo to be
+on the board. M120–M124 are yours, already there, from before this file existed to tell you so.
+Use it:
 
-**The one gap, stated rather than papered over:** unlike HOLLOWMAST's `BUGS.md`, this project has
-no tracker registered in `mission-control/server/trackers.js`, so none of this shows up on
-`/api/board` yet. `HUMAN_CHECKPOINTS.md` is a checkpoint list, not a bug tracker, and adding a
-parser for it is real work — not something to build unasked, per the same rule that already
-governs you ("New modules... propose one in a handover; do not build it"). Until an architect
-session decides that's worth doing, your findings live in your handovers and in this file's
-`git log`, and the owner (or the next Claude architect session) reads them from there. That is a
-real second-brain path, just a shorter one than the board.
+```bash
+curl -X POST http://127.0.0.1:3000/api/todo/items -H "Content-Type: application/json" \
+  -d '{"title":"...", "project":"income-portfolio", "kind":"bug", "priority":"P1", "owner":"YOU", "rationale":"..."}'
+```
+
+`POST /api/todo/items/<id>/notes` adds to an existing item instead of filing a new one — **check
+`GET /api/todo/items` for an item covering the same ground before filing**, the same "one owner
+per finding" rule that already governs figures. The architect (this session) filed three
+duplicates of your own M121/M122/M123 by skipping that check; they're deleted and folded back in
+as notes now, but the lesson is the same for you as it was for me — search before you file, always.
+
+The handover chain (`node "../mission-control/tools/handover.cjs" <file> --title "Codex Worker"`)
+is still yours to use every shift — it's how the supervisor knows you ran at all — but it's not
+the only place your findings live, and treating it as the only one undersells what's already
+working.
 
 ---
 
